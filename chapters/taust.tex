@@ -56,29 +56,39 @@ spektririba hõlmavad nähtavat valgust, lähedast infrapunat ja lühilaine
 infrapunat, võimaldades detailset maastiku klassifitseerimist, sealhulgas
 metsade, veekogude ja muu loodusliku keskkonna eristamist. Iga ribaga seondub
 kindel lainepikkuse vahemik, mida spetsiifiliste filtrite abil eraldatakse. \cite{S2Mission}
+\bigskip
 
 \begin{longtable}{llll}
     \hline
     Riba & Resolutsioon & Kasutus                          \\ 
     \hline
-    B01  & 60 m         & Aerosool                         \\
-    B02  & 10 m         & Sinine                           \\
-    B03  & 10 m         & Roheline                         \\
-    B04  & 10 m         & Punane                           \\
-    B05  & 20 m         & Vegetatsiooni klassifitseerimine \\
-    B06  & 20 m         & Vegetatsiooni klassifitseerimine \\
-    B07  & 20 m         & Vegetatsiooni klassifitseerimine \\
-    B08  & 10 m         & Lähiinfrapunariba on hea rannajoonte ja biomassisisalduse kaardistamiseks \\
-    B8A  & 20 m         & Kitsam lähedane infrapunane  \\
-    B09  & 60 m         & Veeaur tuvastus                       \\
-    B10  & 60 m         & Pilvede tuvastus                      \\
-    B11  & 20 m         & Lühilaine infrapunane 1      \\
-    B12  & 20 m         & Lühilaine infrapunane 2      \\
+    B01  & 60$m \mkern3mu px^{-1}$        & Aerosool                         \\
+    B02  & 10$m \mkern3mu px^{-1}$        & Sinine                           \\
+    B03  & 10$m \mkern3mu px^{-1}$        & Roheline                         \\
+    B04  & 10$m \mkern3mu px^{-1}$        & Punane                           \\
+    B05  & 20$m \mkern3mu px^{-1}$        & Vegetatsiooni klassifitseerimine \\
+    B06  & 20$m \mkern3mu px^{-1}$        & Vegetatsiooni klassifitseerimine \\
+    B07  & 20$m \mkern3mu px^{-1}$        & Vegetatsiooni klassifitseerimine \\
+    B08  & 10$m \mkern3mu px^{-1}$        & Lähiinfrapunariba on hea rannajoonte ja biomassisisalduse kaardistamiseks \\
+    B8A  & 20$m \mkern3mu px^{-1}$        & Kitsam lähedane infrapunane  \\
+    B09  & 60$m \mkern3mu px^{-1}$        & Veeaur tuvastus                       \\
+    B10  & 60$m \mkern3mu px^{-1}$        & Pilvede tuvastus                      \\
+    B11  & 20$m \mkern3mu px^{-1}$        & Lühilaine infrapunane 1      \\
+    B12  & 20$m \mkern3mu px^{-1}$        & Lühilaine infrapunane 2      \\
          &              &                    &                              \\ \hline
     \caption{Sentinel-2 MSI spektriribad ja nende kasutusvaldkonnad}
     \label{tab:s2bands}
 \end{longtable}
 
+\subsection{Koordinaatsüsteemid ja CRS}
+Koordinaatsüsteem on meetod, mille abil määratletakse ja kirjeldatakse punktide
+asukohti maastikul, kasutades koordinaate. Selles kontekstis eristatakse kahte
+tüüpi: geograafilised koordinaatsüsteemid, mis kasutavad laiuse ja pikkuse
+väärtusi, ning projekteeritud koordinaatsüsteemid, mis teisendavad
+geograafilised koordinaadid lameda kaardi koordinaatideks, kasutades
+matemaatilisi projektsioone. CRS ehk koordinaatide viite süsteem määratleb
+reeglid ja parameetrid, mille alusel need koordinaadid seonduvad reaalse
+maastikuga. \cite{8CoordinateReference}
 
 \section{Masinõppe meetodite kasutus kaugseires}
 smt smt smt smt smt
