@@ -49,5 +49,36 @@ gaase nagu lämmastikdioksiid, osoon, formaldehüüd, vääveldioksiid, metaan,
 vingugaas ja aerosoolid - kõik need mõjutavad meie hingatavat õhku, tervist ja
 kliimat. \cite{S5PApplications}
 \subsection{Lainepikkuste spekter}
+Spektriribad on satelliitandmete analüüsimisel üliolulised, sest need
+võimaldavad eristada maapinna erinevaid omadusi, lähtudes elektromagnetilise
+spektri konkreetsetest lainepikkustest. Näiteks Sentinel-2 MSI instrumendi 13
+spektririba hõlmavad nähtavat valgust, lähedast infrapunat ja lühilaine
+infrapunat, võimaldades detailset maastiku klassifitseerimist, sealhulgas
+metsade, veekogude ja muu loodusliku keskkonna eristamist. Iga ribaga seondub
+kindel lainepikkuse vahemik, mida spetsiifiliste filtrite abil eraldatakse. \cite{S2Mission}
+
+\begin{longtable}{llll}
+    \hline
+    Riba & Resolutsioon & Kasutus                          \\ 
+    \hline
+    B01  & 60 m         & Aerosool                         \\
+    B02  & 10 m         & Sinine                           \\
+    B03  & 10 m         & Roheline                         \\
+    B04  & 10 m         & Punane                           \\
+    B05  & 20 m         & Vegetatsiooni klassifitseerimine \\
+    B06  & 20 m         & Vegetatsiooni klassifitseerimine \\
+    B07  & 20 m         & Vegetatsiooni klassifitseerimine \\
+    B08  & 10 m         & Lähiinfrapunariba on hea rannajoonte ja biomassisisalduse kaardistamiseks \\
+    B8A  & 20 m         & Kitsam lähedane infrapunane  \\
+    B09  & 60 m         & Veeaur tuvastus                       \\
+    B10  & 60 m         & Pilvede tuvastus                      \\
+    B11  & 20 m         & Lühilaine infrapunane 1      \\
+    B12  & 20 m         & Lühilaine infrapunane 2      \\
+         &              &                    &                              \\ \hline
+    \caption{Sentinel-2 MSI spektriribad ja nende kasutusvaldkonnad}
+    \label{tab:s2bands}
+\end{longtable}
+
 
 \section{Masinõppe meetodite kasutus kaugseires}
+smt smt smt smt smt
