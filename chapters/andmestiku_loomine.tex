@@ -8,26 +8,28 @@ kontrollib esitatud teatiste nõuetekohasust ning veendub, et kavandatav raie
 vastab kehtivatele õigusaktidele. Metsateatised menetletakse ja säilitatakse
 riiklikus metsaregistris. Peale edukat menetlemist või raie töö alustada 10 päeva peale otsust ja kuni 24 kuu jooksul. \cite{MetsateatisJaMetsaregister} Metsateatised on avalikud ja neid saab vaadata riiklikus metsaregistris.
 
-Koostöös Keskkonnaametiga (envir) saime andmed metsateatistest, mis sisaldavad teavet nii metsateatise esitamise kuupäeva, metsateatise menetlemise kuupäeva, metsateatise kehtivuse alguskuupäeva kui ka metsateatise kehtivuse lõppkuupäeva kohta. Kuna riigimetsade teatised on täpsemas seisukorras siis sai võetud need raieteatised aluseks. Seoses sellega et ühe lõigu peal võib olla väga väike kogus metsa, sai teatiste pärimine ümber ehitatud sedasi, et ühe riigimetsa raie ümber kogutakse peale raie toimumist kokku ka kõik teised piirkonnad millel on teada kas on mets või raie. Piirkonniti pärimine sai teostatud kasutades PostGISi liidestust Posgresi andmebaasiga.
+Koostöös Keskkonnaametiga (envir) saadi andmed metsateatistest, mis sisaldavad teavet nii metsateatise esitamise kuupäeva, metsateatise menetlemise kuupäeva, metsateatise kehtivuse alguskuupäeva kui ka metsateatise kehtivuse lõppkuupäeva kohta. Kuna riigimetsade teatised on täpsemas seisukorras siis sai võetud need raieteatised aluseks. Seoses sellega et ühe lõigu peal võib olla väga väike kogus metsa, sai teatiste pärimine ümber ehitatud sedasi, et ühe metsa raie ümber kogutakse peale raie toimumist kokku ka kõik teised piirkonnad millel on teada kas on mets või raie. Piirkonniti pärimine sai teostatud kasutades PostGISi liidestust Posgresi andmebaasiga. Iga raie sisaldab ka endas geomeetria veergu, mis esitab polügooni kujul selle asukohta. 
 
 \begin{figure}[hb]
     \centering
     \includegraphics[width=.5\textwidth]{figures/andmestik/er_id_is10124223.png}
-    \caption{Näidis lageraie ümbruse päringust saadud ümbrus}
+    \caption{Näidis ühe lageraie päringust saadud ümbrus}
     \label{fig:umbrusexample}
 \end{figure}
 
-\begin{itemize}
-    \item kust andmeid saab
+Polügoon on geomeetriline kujund, mis määratleb kindla ala, ühendades üksteisega
+punktid, et moodustada suletud piirjoon. Andmetöötluse ja ruumiandmete analüüsi
+kontekstis kasutatakse polügoone, et täpselt määratleda geograafilisi alasid. \cite{WhatLocationPolygon}
 
-    \item kuidas andmeid töödelda
-    \begin{itemize}
-        \item kuidas andmeid puhastada
-        \item kuidas andmeid ühendada
-        \item kuidas andmeid lõigata
-        \item kuidas andmeid venitada
-        \item kui andmeid on puudu või kuidas filtreerida
-    \end{itemize}
-
-    
-\item kuidas andmeid maskida
+%\begin{itemize}
+%    \item kust andmeid saab
+%    \item kuidas andmeid töödelda
+%    \begin{itemize}
+%        \item kuidas andmeid puhastada
+%        \item kuidas andmeid ühendada
+%        \item kuidas andmeid lõigata
+%        \item kuidas andmeid venitada
+%        \item kui andmeid on puudu või kuidas filtreerida
+%    \end{itemize}
+%    \item kuidas andmeid maskida
+%\end{itemize}
