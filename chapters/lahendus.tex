@@ -54,6 +54,20 @@ andmete töötlemise funktsionaalsuse. See võimaldab keerukaid ruumi operatsioo
 ja on oluline tööriist suurte geospatiaalsete andmekogude haldamisel ning
 analüüsil.
 
+\textbf{Riistvara}\nopagebreak[4]
+%Töötlemiseks kasutati 16 GB RAM-iga sülearvutit
+Uurimistöö tegemisel kasutati ülikooli AI-labori ressursse, mis pakkusid kaasaegset riistvara. Labor koosneb ühest pea-sõlmest mis haldab teisi masinaid, ning alam sõlmi, mis teostavad töid. Autor kasutas ai-lab-07 sõlme CPU-intensiivsete ülesannete, nagu andmekogumi koostamine, piltide töötlemine ja kompressioon, ning mitte sügav närvivõrkude mudelite treenimiseks nagu Random Foresti. Samas süvaõppe eksperimentide teostamiseks kasutati ai-lab-04 sõlme, mille võimas GPU ja suur mälumaht võimaldasid keerukamate mudelite treenimist. Selline ressursside jaotus aitas töövoogu optimeerida ja tagada tööde sujuv teostus vastavalt konkreetsetele arvutusvajadustele.
+\begin{longtable}{lllll}
+    \hline
+    Sõlm & Protsessor & Mälu & GPU & GPU mälu                         \\ 
+    \hline
+    ai-lab-07 & 3960X 24-cores/48-threads & 128 GB & NVidia 2080Ti & 11 GB    \\
+    ai-lab-04 & 3970X 32-cores/64-threads & 128 GB & NVidia 3090 & 24 GB      \\
+    &              &                    &                              \\ \hline
+    \caption{Kasutatud riistvara}
+    \label{tab:hardwareused}
+\end{longtable}
+
 \input{chapters/andmestiku_loomine.tex}
 
 \section{Mudelite valik}
