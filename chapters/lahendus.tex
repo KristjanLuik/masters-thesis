@@ -55,7 +55,7 @@ analüüsil.
 
 \textbf{Riistvara}\nopagebreak[4]
 
-Uurimistöö läbiviimisel kasutati ülikooli AI-labori ressursse. Labor koosneb ühest pea-sõlmest mis haldab teisi masinaid, ning alam sõlmi, mis teostavad töid. Autor kasutas ai-lab-07 sõlme CPU-intensiivsete ülesannete, nagu andmekogumi koostamine, piltide töötlemine ja kompressioon, ning mitte sügav närvivõrkude mudelite treenimiseks nagu \textit{Random Foresti}. Samas süvaõppe eksperimentide teostamiseks kasutati ai-lab-04 sõlme, mille GPU ja mälumaht võimaldasid keerukamate mudelite treenimist. Selline ressursside jaotus aitas töövoogu optimeerida ja tagada tööde sujuv teostus vastavalt konkreetsetele arvutusvajadustele.
+Uurimistöö läbiviimisel kasutati ülikooli AI-labori ressursse. Labor koosneb ühest pea-sõlmest, mis haldab teisi masinaid, ning alamsõlmedest, mis teostavad töid. Autor kasutas ai-lab-07 sõlme CPU-intensiivsete ülesannete, nagu andmekogumi koostamine, piltide töötlemine ja kompressioon, ning mitte sügav närvivõrkude mudelite treenimiseks nagu \textit{Random Foresti}. Samas süvaõppe eksperimentide teostamiseks kasutati ai-lab-04 sõlme, mille GPU ja mälumaht võimaldasid keerukamate mudelite treenimist. Selline ressursside jaotus aitas töövoogu optimeerida ja tagada tööde sujuva teostuse vastavalt konkreetsetele arvutusvajadustele.
 \begin{longtable}{lllll}
     \hline
     Sõlm & Protsessor & Mälu & GPU & GPU mälu                         \\ 
@@ -74,7 +74,7 @@ Alustemudelid (\textit{Foundation models}) on suuremahulistel andmekogudel
 ennastjuhendavalt treenitud sügavad närvivõrgud, mis toimivad üldotstarbelise
 baasina mitmesuguste masinõppeülesannete lahendamiseks. Erinevalt
 traditsioonilistest mudelitest, mis on välja töötatud konkreetse ülesande jaoks
-ja nõuavad eraldi treeningut, on alus mudelid eelnevalt ettevalmistatud laia
+ja nõuavad eraldi treeningut, on alusmudelid eelnevalt ettevalmistatud laia
 valiku ülesannete sooritamiseks --- alates loomulikust keele töötlemisest ja
 tekstigeneratsioonist kuni pildiklassifitseerimise ja vastuste genereerimiseni
 --- ilma täiendava märgendatud õppematerjalita. Nende mudelite
@@ -84,20 +84,21 @@ konkreetsete rakenduste jaoks, vähendades oluliselt arendusaja ja
 arvutusressursside vajadust võimaldades keskenduda pigem mudeli peenhäälestusele kui treenimisele nullist. 
 \cite{WhatAreFoundation}
 
-\textbf{DINO v2} on Meta AI poolt välja töötatud \textit{Vision
-Transformer}'itel (ViT) põhinevad isejuhitavat (self‑supervised, SSL) õppemeetodit, mille
-ülesanne on genereerida üldotstarbelisi visuaalseid omadusi ilma märgendatud
-treeningandmeteta. Mudeli struktuuri südameks on õpetaja--õpilase skeem, kus
-õpilasmudeli parameetreid koheldakse tavalise ViT‑võrguna, aga õpetajamudeli
+\textbf{DINO v2} on Meta AI poolt loodud isejuhendatud (self-supervised) mudelite kogum,
+mille eesmärk on õppida üldotstarbelisi visuaalseid omadusi ilma märgendatud
+andmeteta. Mudel põhineb Vision Transformer (ViT) arhitektuuril, mille erinevad
+variandid (nt ViT-S/14, ViT-B/14, ViT-L/14 ja ViT-g/14) on eelõpetatud suurel,
+mitmekesise sisuga ja kureeritud pildikogumil. Mudeli struktuuri põhjaks on
+õpetaja--õpilase skeem, kus õpilasmudeli parameetreid koheldakse tavalise ViT‑võrguna, aga õpetajamudeli
 kaale uuendatakse õpilase kaalude eksponentsiaalse libiseva keskmise kaudu.
 Treeningprotsessi stabiliseerimiseks ja tunnusruumi hajutamiseks on lisatud
 Kozachenko--Leonenko (KoLeo) regulaarija, mis soodustab tunnuste ühtlast jaotust.
 Õppetöö lõpus suurendatakse sisendpiltide resolutsiooni
 ajutiselt 518\(\times \)518 pikslile, et parandada piksli tasemel
-ülesannete, näiteks semantilise segmenteerimise ja objekti tuvastus ennustuse,
+ülesannete, näiteks semantilise segmenteerimise ja objektituvastuse ennustuse
 täpsust. Praktikas saavutab DINO v2 tänu optimeeritud
 FlashAttention‑i ja PyTorch Full‑Sharded Data Parallel (FSDP) meetodile kuni
-kahekordse kiiruse ning kolmekordse mälu tarbe vajaduse, võrreldes varasemate SSL‑mudelitega. \cite{oquabDINOv2LearningRobust2024}
+kahekordse kiiruse ning vajab kuni kolm korda vähem mälumahtu, võrreldes varasemate SSL‑mudelitega. \cite{oquabDINOv2LearningRobust2024}
 
 \section{Treenimis protsetuurid}
-Describe the training process, including parameter tuning (grid search, cross-validation), and optimization methods.
+%Describe the training process, including parameter tuning (grid search, cross-validation), and optimization methods.
