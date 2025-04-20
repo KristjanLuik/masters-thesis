@@ -8,7 +8,17 @@ kontrollib esitatud teatiste nõuetekohasust ning veendub, et kavandatav raie
 vastab kehtivatele õigusaktidele. Metsateatised menetletakse ja säilitatakse
 riiklikus metsaregistris. Peale edukat menetlemist võib raietöödega alustada 10 päeva peale otsust ja kuni 24 kuu jooksul. \cite{MetsateatisJaMetsaregister} Metsateatised on avalikud ja neid saab vaadata riiklikus metsaregistris.
 
-Koostöös Keskkonnaametiga (envir) saadi andmed metsateatistest, mis sisaldavad teavet nii metsateatise esitamise kuupäeva, metsateatise menetlemise kuupäeva, metsateatise kehtivuse alguskuupäeva kui ka metsateatise kehtivuse lõppkuupäeva kohta. Kuna riigimetsade teatised on täpsemas seisukorras, siis võeti need raieteatised selle uurimustöö aluseks. Seoses sellega et ühe lõigu peal võib olla väga väike kogus metsa, sai teatiste pärimine ümber ehitatud sedasi, et ühe metsa raie ümber kogutakse peale raie toimumist kokku ka kõik teised piirkonnad, millel on teada kas on mets või raieala. Piirkonniti pärimine sai teostatud kasutades PostGISi liidestust Postgresi andmebaasiga. Iga raie sisaldab ka endas geomeetria veergu, mis esitab polügooni kujul selle asukohta.
+Metsade inventeerimise ja registrisse kandmise protsess algab metsaeraldiste
+täpse kaardistamisega, kasutades L‑EST97 ristkoordinaatide süsteemi, Eesti
+põhikaarti, katastriüksuse plaane ning vajadusel kaugseire andmeid eraldiste
+piiritlemiseks ja võimalike situatsioonielementide täpsustamiseks. Kaardistamise
+tulemusena koostatakse geoinfosüsteemi metsaeraldiste kiht, kus iga eraldis on
+nummerdatud ning selle pindala, arvutatuna piiripunktide koordinaatide alusel, 
+esitatakse hektarites vähemalt kümnendkohani ning täpsusega 10 meetrit --- see
+loob aluse usaldusväärsele pindalaarvestusele ja edaspidistele
+takseerimistoimingutele. \cite{MetsaKorraldamiseJuhend}
+
+Koostöös Keskkonnaametiga (Envir) saadi andmed metsateatistest, mis sisaldavad teavet nii metsateatise esitamise kuupäeva, metsateatise menetlemise kuupäeva, metsateatise kehtivuse alguskuupäeva kui ka metsateatise kehtivuse lõppkuupäeva kohta. Kuna riigimetsade teatised on täpsemas seisukorras, siis võeti need raieteatised selle uurimustöö aluseks. Seoses sellega et ühe lõigu peal võib olla väga väike kogus metsa, sai teatiste pärimine ümber ehitatud sedasi, et ühe metsa raie ümber kogutakse peale raie toimumist kokku ka kõik teiste raiete raadiuses asuvad piirkonnad, millel on teada kas on mets või raieala. Piirkonniti pärimine sai teostatud kasutades PostGISi liidest Postgresi andmebaasiga. Iga raie sisaldab ka endas geomeetria veergu, mis esitab polügooni kujul selle asukohta.
 
 % TODO: eelnevas lõigus teha arusaadavamaks, mis on lõik millest räägitakse, eelnevalt juttu kuupäevadest jm teabest ja siis võib jääda segaseks. lisaks palun täpsustada: kogutakse kokku ka teised ... raadiuses asuvad piirkonnad
 
@@ -22,6 +32,8 @@ Koostöös Keskkonnaametiga (envir) saadi andmed metsateatistest, mis sisaldavad
 Polügoon on geomeetriline kujund, mis määratleb kindla ala, ühendades üksteisega
 punktid, et moodustada suletud piirjoon. Andmetöötluse ja ruumiandmete analüüsi
 kontekstis kasutatakse polügoone, et täpselt määratleda geograafilisi alasid. \cite{WhatLocationPolygon}
+
+
 
 \begin{figure}[H]
     \centering
