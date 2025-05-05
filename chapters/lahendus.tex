@@ -5,7 +5,8 @@
 
 Python on üldotstarbeline programmeerimiskeel, mida kasutatakse
 laialdaselt andmeteaduse, masinõppe ja ruumiandmete analüüsi ülesanneteks
-oma lihtsuse ja mitmekülgsuse tõttu.
+oma lihtsuse ja mitmekülgsuse tõttu. Käesolevs töös kasutatakse Pythonit
+andmete töötlemiseks, mudelite treenimiseks ja tulemuste analüüsimiseks.
 
 
 
@@ -14,7 +15,9 @@ oma lihtsuse ja mitmekülgsuse tõttu.
 Jupyter Notebookid pakuvad interaktiivset keskkonda, kus
 saab koodi kirjutada, käivitada ja dokumenteerida ühes kohas. Need võimaldavad
 dünaamilist andmeanalüüsi ja tulemuste visuaalset esitlust, muutes
-uurimisprotsessi läbipaistvaks ja korduvaks.
+uurimisprotsessi läbipaistvaks ja korduvaks. Käesolevas töös kasutatakse
+Jupyter Notebooke peamiselt katsetuste tegemiseks ja tulemuste
+visualiseerimiseks.
 
 
 
@@ -22,7 +25,8 @@ uurimisprotsessi läbipaistvaks ja korduvaks.
 
 Pandas on andmetöötluse teek, mis pakub paindlikke ja
 efektiivseid andmestruktuure tabelipõhise andmetöötluse jaoks. See lihtsustab
-andmete puhastamist, analüüsi ja manipuleerimist.
+andmete puhastamist, analüüsi ja manipuleerimist. Käesolevas töös
+kasutatakse Pandast andmete lugemiseks, töötlemiseks ja analüüsimiseks.
 
 
 \textbf{GeoPandas}\nopagebreak[4]
@@ -37,21 +41,23 @@ ruumiandmeid ning teostada geomeetrilisi operatsioone nagu lõikumine ja
 
 Rasterio on Pythoni teek, mis keskendub rasterandmete lugemisele
 ja töötlemisele tuginedes GDAL-ile. See võimaldab ruumiandmete analüüsi
-ning laseb rasterfailidega töötada efektiivselt ja intuitiivselt.
+ning laseb rasterfailidega töötada efektiivselt ja intuitiivselt. Käesolevas töös oli Rasterio peamiseks tööriist rasterandmete lugemiseks ja töötlemiseks, sealhulgas satelliidipiltide koostamiseks ja maskide genereerimiseks.
 
 \textbf{QGIS}\nopagebreak[4]
 
 QGIS on tasuta ja avatud lähtekoodiga töölaua GIS-tarkvara, mis võimaldab
 kasutajatel andmeid visuaalselt analüüsida, redigeerida ja kaardistada. See
 toetab mitmeid andmeformaate ja pakub laialdasi geoprotsessimise võimalusi,
-olles populaarne nii akadeemilises kui ka professionaalses keskkonnas.
+olles populaarne nii akadeemilises kui ka professionaalses keskkonnas. Käesolevas
+töös kasutatakse QGIS-i peamiselt andmete visualiseerimiseks ja
+analüüsimiseks, et mõista ruumiandmete struktuuri ja omadusi.
 
 
 \textbf{PostGIS}\nopagebreak[4]
 
 PostGIS on PostgreSQL andmebaasi laiendus, mis lisab ruumiandmete töötlemise funktsionaalsuse. See võimaldab keerukaid ruumi operatsioone
 ja on oluline tööriist suurte ruumiandmete kogude haldamisel ning
-analüüsil.
+analüüsil. Käesolevas töös autor ise otseselt PostGIS-i ei kasutanud, kuid Keskkonnaagentuuri andmebaas, kust andmed saadi, on PostGIS-i baasil üles ehitatud. Seega on see oluline komponent andmete haldamisel ja töötlemisel.
 
 \textbf{Riistvara}\nopagebreak[4]
 
@@ -100,5 +106,7 @@ täpsust. Praktikas saavutab DINO v2 tänu optimeeritud
 FlashAttention‑i ja PyTorch Full‑Sharded Data Parallel (FSDP) meetodile kuni
 kahekordse kiiruse ning vajab kuni kolm korda vähem mälumahtu, võrreldes varasemate SSL‑mudelitega. \cite{oquabDINOv2LearningRobust2024}
 
+\section{Seoste leidmine}
+\input{chapters/seose_leidmine.tex}
 \section{Treenimis protsetuurid}
 %Describe the training process, including parameter tuning (grid search, cross-validation), and optimization methods.
