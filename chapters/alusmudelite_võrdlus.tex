@@ -1,0 +1,39 @@
+Käesolev peatükk analüüsib DINO v2 mudeli võrdlust teiste tipptasemel mudelitega, eriti semantilise segmentimise kontekstis, ning põhjendab selle valikut metsaalade ja metsaraie tuvastamiseks satelliidipiltidelt.
+
+Ühes uuringus võrreldi DINO v2 mudelit mitmete teiste segmenteerimismeetoditega
+ geoloogiliste kompuutertomograafia (KT) skaneeringute analüüsil. Hinnati Otsu
+ lävendamist, klastritehnikaid (K-keskmised, fuzzy C-means), juhendatud
+ masinõppe meetodit (Random Forest) ja süvaõppe mudeleid (UNet, ResNet152 ja
+ DINOv2). Tulemused näitasid, et eelnevalt treenitud DINO v2 demonstreeris
+ tugevat jõudlust kivimipiltide klassifitseerimisel isegi siis, kui
+ KT-skaneeringud ei kuulunud selle esialgsesse treeningandmestikku.
+ Segmenteerimise ülesannetes ületas eriti LoRA abil peenhäälestatud DINO v2
+ teisi meetodeid mitmeklassiliste ülesannete puhul, isegi piiratud andmetega.
+ Visuaalne kontroll näitas, et DINO v2 poolt genereeritud segmenteerimismärgid
+ olid sageli täpsemad kui algsed sihtmärgid. \cite{DINOv2RocksGeological}
+
+Teises uuringus hinnati DINO v2 jõudlust vasaku koja segmenteerimisel MRI
+ piltidelt. Eelnevalt treenitud DINO v2 saavutas Dice'i sarnasuse koefitsiendi
+ (DSC)  87.1 \%. Võrdluses nullist treenitud U-Net
+ mudeliga näitasid tulemused, et iseseisev õpe DINO v2 abil võib oluliselt
+ parandada meditsiinilise pildisegmentimise tõhusust ja täpsust, vähendades
+ vajadust suurte märgistatud andmestike järele. \cite{kunduAssessingPerformanceDINOv22024}
+
+Lisaks on Panopticon , DINO v2 raamistikule ehitatud mudel, saavutanud
+ tipptasemel tulemusi GEO-Bench võrdlustestis maakatte klassifitseerimisel,
+ ületades teisi sensoragnostilisi mudeleid ning näidates konkurentsivõimet ka
+ kindlatele sensoritele kohandatud mudelitega. See demonstreerib DINO v2
+ arhitektuuri tugevust ja kohanemisvõimet erinevate kaugseire andmetüüpidega. \cite{PanopticonAdvancingAnySensor}
+
+Ühes teises töös võrreldi DINO (DINO v2 eelkäija) laiendust DINO-MC teiste
+iseseisvalt õppivate meetoditega kaugseire ülesannetes. Lineaarse testimise
+käigus saavutas DINO-MC 2.56\% kõrgema täpsuse väiksema eelnevalt treenitud
+andmestikuga kui SeCo. Peenhäälestamisel kahel kaugseire klassifitseerimise ja
+muutuste tuvastamise ülesandel ületas DINO-MC nii DINO kui ka SeCo mudeleid. \cite{ExtendingGloballocalView}
+
+Ülaltoodud näited illustreerivad DINO v2 mudeli tugevust ja mitmekülgsust
+erinevates segmentimise ülesannetes, sealhulgas geoloogiliste, meditsiiniliste
+ja kaugseire piltide analüüsil. Mudeli võime saavutada konkurentsivõimelisi
+tulemusi ilma spetsiifilise peenhäälestuseta ning selle parem üldistusvõime
+muudavad selle sobivaks valikuks metsaalade ja metsaraie tuvastamiseks
+satelliidipiltidelt.
