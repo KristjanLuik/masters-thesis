@@ -1,6 +1,6 @@
 Selleks et tõestada antud magistritöö eesmärki segmenteerida lageraie ja metsa alasi suurte visioonimudelitega, klusterdatakse DinoV2 väljundid, et leida, kas need alad on eristatavad. Selleks on vajalik eksperdiga valideerida ühe lageraie piirkonna alad, et kindel olla, et need vastavad tõele satelliidi pildilt.
 
-Joonisel Joonis \ref{fig:näidisSadeliidiPilt} on võetud näidiseks et viia läbi eksperiment, et aru saada kas mudelid suudavad eristada lageraie ja metsa alasid satelliidi pildilt. Antud pilt on saadud Sentinel-2 andmebaasist  ja see sai valitud esiteks sellepärast et see on võimalikult selge pilvedest aga et oleks ka soojemal hooajal. Samuti on pilt heaks aluseks, sest sellel on sattunud raie- ja metsapiirkondi kõrvuti.
+Joonisel Joonis \ref{fig:näidisSadeliidiPilt} on võetud näidiseks, et viia läbi eksperiment mõistmaks kas mudelid suudavad eristada lageraie ja metsa alasid satelliidi pildilt. Antud Sentinel-2 andmebaasist saadud pilt sai valitud esiteks sellepärast, et see on hea nähtavusega, võimalikult vähe pilvine ja soojemal hooajal, kui pole lund ja puud on lehteis. Teiseks on pilt heaks aluseks, sest sellel on sattunud raie- ja metsapiirkondi kõrvuti.
 
 \begin{figure}[H]
     \centering
@@ -9,7 +9,7 @@ Joonisel Joonis \ref{fig:näidisSadeliidiPilt} on võetud näidiseks et viia lä
     \label{fig:näidisSadeliidiPilt}
 \end{figure}
 
-Joonisel Joonis \ref{fig:raieInfoMask} on näha lageraie piirkond, mis on toodud välja tumepunasena ja metsana helepunasena. Tegemist on aladega mis on teada Keskkonnaametile ja mille kohta on olemas ka metsateatis. Satelliidi pilt on saadud Sentinel-2 andmebaasist ja sellel on 10 meetrine resolutsioon. Antud pilt on saadud raie teostamise ajast kuni 40 päeva hiljem, seega on see piisavalt värske, et näha ka metsade seisukorda.
+Joonisel Joonis \ref{fig:raieInfoMask} on näha lageraie piirkond, mis on toodud välja tumedama roosana, ja metsa piirkond, mis on joonisel heleroosana. Tegemist on aladega mis on teada Keskkonnaametile ja mille kohta on olemas ka metsateatis. Satelliidi pilt on saadud Sentinel-2 andmebaasist ja sellel on 10 meetrine resolutsioon. Antud pilt on saadud raie teostamise ajast kuni 40 päeva hiljem, seega on see piisavalt värske, et näha ka metsade seisukorda.
 
 \begin{figure}[H]
     \centering
@@ -18,7 +18,7 @@ Joonisel Joonis \ref{fig:raieInfoMask} on näha lageraie piirkond, mis on toodud
     \label{fig:raieInfoMask}
 \end{figure}
 
-Joonisel Joonis \ref{fig:raieInfoMask_ekspert} on näha lageraie piirkond, mis on toodud välja tumepunasena ja metsana roheline. Ekspert on võtnud teatistest saadud info aluseks, aga muud infot nagu aerofotod ja teised lainepikuse pildid on samuti kasutatud, et leida täpsemad piirded. Ekspert on leidnud, et antud piirkonnas on ka teisi alasid, mis ei ole lageraie, aga siiski on nad metsad. Samuti pildil on alasid, mis teatistes on märgitud metsaks aga silmaga vaadates kujutab rohkem raiet. Seega on eksperdi poolt loodud mask palju täpsem ja seetõttu on see vajalik andmestiku loomise protsessis.
+Joonisel Joonis \ref{fig:raieInfoMask_ekspert} on näha lageraie piirkond, mis on toodud välja tumepunasena ja metsa piirkond, mis on märgitud rohelisega. Ekspert on võtnud teatistest saadud info aluseks, aga muud infot nagu aerofotod ja teised lainepikuse pildid on samuti kasutatud, et leida täpsemad piirded. Ekspert on leidnud, et antud piirkonnas on ka teisi alasid, mis ei ole lageraie, aga siiski on nad metsad. Samuti on pildil alasid, mis teatistes on märgitud metsaks aga silmaga vaadates kujutab rohkem raiet. Seega on eksperdi poolt loodud mask palju täpsem ja seetõttu on eksperdi kaasamine vajalik andmestiku loomise protsessis.
 
 \begin{figure}[H]
     \centering
@@ -27,7 +27,7 @@ Joonisel Joonis \ref{fig:raieInfoMask_ekspert} on näha lageraie piirkond, mis o
     \label{fig:raieInfoMask_ekspert}
 \end{figure}
 
-Järgnevalt joonisel Joonis \ref{fig:segmenteeritudPealiskiht}, rakendati klastrianalüüsi süvaõppemudelist saadud
+Järgneval joonisel Joonis \ref{fig:segmenteeritudPealiskiht}, rakendati klastrianalüüsi süvaõppemudelist saadud
 kõrgdimensionaalsetele tunnusevektoritele, mis esindavad sisendpildi
 diskreetseid paiku. Eelkõige kasutati k-keskmise algoritmi, et grupeerida need
 tunnusevektorid sarnaste semantiliste omaduste alusel. Iga pildilaigule vastav
@@ -44,7 +44,7 @@ esitatud unikaalse värviga, võimaldades seeläbi kvalitatiivselt hinnata mudel
     \label{fig:segmenteeritudPealiskiht}
 \end{figure}
 
-Joonisel Joonis \ref{fig:tsneDinoPatchEmbedings} on rakendatud klassipõhist klasterdamise meetodi, mille eesmärk on luua
+Joonisel Joonis \ref{fig:tsneDinoPatchEmbedings} on rakendatud klassipõhist klasterdamise meetodit, mille eesmärk on luua
 pildimaterjalist semantiliselt sidusaid piirkondi, grupeerides pildi elemendid
 eelnevalt defineeritud klassifikatsioonikategooriate alusel. Lähtudes mudeli
 genereeritud klassifikatsiooniväljunditest, määratakse iga pildielement kõige
@@ -53,7 +53,7 @@ rakendamise tulemusena saadakse segmentatsioon, kus ühte klastrisse kuuluvad
 pildi osad on mudeli poolt klassifitseeritud sarnaselt. Lõppeesmärk on seeläbi
 genereerida pildist arusaadavam representatsioon, mis
 võimaldab interpreteerida pildi sisu semantilisel tasemel, tuues
-esile objektide ja piirkondade klassipõhised seosed. Pildil on väljatoodud klass 1 mis on mets ja klass 2 mis on lageraie, lisaks sai eemaldatud tausta klass et oleks kergem jälgida uuritavaid klasse.
+esile objektide ja piirkondade klassipõhised seosed. Pildil on väljatoodud klass 1 mis on mets ja klass 2 mis on lageraie, lisaks sai eemaldatud tausta klass, et oleks kergem jälgida uuritavaid klasse.
 
 \begin{figure}[H]
     \centering
