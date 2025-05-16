@@ -1,5 +1,21 @@
 Käesolev peatükk analüüsib DINO v2 mudeli võrdlust teiste tipptasemel mudelitega, eriti semantilise segmenteerimise kontekstis, ning põhjendab selle valikut metsaalade ja metsaraie tuvastamiseks satelliidipiltidelt.
 
+\textbf{DINO v2} on Meta AI poolt loodud isejuhendatud (self-supervised) mudelite kogum,
+mille eesmärk on õppida üldotstarbelisi visuaalseid omadusi ilma märgendatud
+andmeteta. Mudel põhineb Vision Transformer (ViT) arhitektuuril, mille erinevad
+variandid (nt ViT-S/14, ViT-B/14, ViT-L/14 ja ViT-g/14) on eelõpetatud suurel,
+mitmekesise sisuga ja kureeritud pildikogumil. Mudeli struktuuri põhjaks on
+õpetaja--õpilase skeem, kus õpilasmudeli parameetreid koheldakse tavalise ViT‑võrguna, aga õpetajamudeli
+kaale uuendatakse õpilase kaalude eksponentsiaalse libiseva keskmise kaudu.
+Treeningprotsessi stabiliseerimiseks ja tunnusruumi hajutamiseks on lisatud
+Kozachenko--Leonenko (KoLeo) regulaarija, mis soodustab tunnuste ühtlast jaotust.
+Õppetöö lõpus suurendatakse sisendpiltide resolutsiooni
+ajutiselt 518\(\times \)518 pikslile, et parandada piksli tasemel
+ülesannete, näiteks semantilise segmenteerimise ja objektituvastuse ennustuse
+täpsust. Praktikas saavutab DINO v2 tänu optimeeritud
+FlashAttention‑i ja PyTorch Full‑Sharded Data Parallel (FSDP) meetodile kuni
+kahekordse kiiruse ning vajab kuni kolm korda vähem mälumahtu, võrreldes varasemate SSL‑mudelitega. \cite{oquabDINOv2LearningRobust2024}
+
 Ühes uuringus võrreldi DINO v2 mudelit mitmete teiste segmenteerimismeetoditega
  geoloogiliste kompuutertomograafia (KT) skaneeringute analüüsil. Hinnati Otsu
  lävendamist, klastritehnikaid (K-keskmised, fuzzy C-means), juhendatud
