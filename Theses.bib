@@ -38,6 +38,24 @@
   file = {/Users/kristjanluik/Zotero/storage/9H9EK79N/2303.html}
 }
 
+@inproceedings{hwangSAM2AbdomenOneshot2024,
+  title = {{{SAM2}} for Abdomen: {{One-shot}} and No Finetuning},
+  shorttitle = {{{SAM2}} for Abdomen},
+  booktitle = {2024 9th {{International Conference}} on {{Intelligent Informatics}} and {{Biomedical Sciences}} ({{ICIIBMS}})},
+  author = {Hwang, Jongyun and Na, Inye and Kim, Jonghun and Park, Hyunjin},
+  date = {2024-11},
+  volume = {9},
+  pages = {551--555},
+  issn = {2189-8723},
+  doi = {10.1109/ICIIBMS62405.2024.10792815},
+  url = {https://ieeexplore.ieee.org/document/10792815/},
+  urldate = {2025-05-16},
+  abstract = {The study introduces SAM2, a novel method for fully automatic abdominal organ segmentation using the Segment Anything Model 2 (SAM2) and Self-Supervised Anatomical Embedding (Emb-SAM). Unlike traditional approaches, our model achieves superior segmentation performance without the need for finetuning or large labeled datasets, relying on a single labeled image. SAM2 leverages its memory bank for mask propagation, originally designed for video segmentation, which we adapt for 3D medical imaging by treating CT slices as sequential frames. Emb-SAM generates precise pseudo-labels by matching anatomical points across images using self-supervised learning. The proposed method effectively segments abdominal organs such as the liver, kidneys, spleen, and aorta, demonstrating superior consistency compared to baseline models on the BTCV dataset. Experimental results show that our model achieves competitive performance, significantly reducing computational costs and manual intervention, thus offering a promising solution for automated medical image segmentation.},
+  eventtitle = {2024 9th {{International Conference}} on {{Intelligent Informatics}} and {{Biomedical Sciences}} ({{ICIIBMS}})},
+  keywords = {Abdomen segmentation,Adaptation models,Biological system modeling,Biological systems,Biomedical imaging,Computational modeling,Image segmentation,Manuals,no finetuning,one-shot segmentation,segment anything model 2,Self-supervised learning,Spleen,Three-dimensional displays},
+  file = {/Users/kristjanluik/Zotero/storage/X2K8PJZU/Hwang et al. - 2024 - SAM2 for abdomen One-shot and no finetuning.pdf}
+}
+
 @online{InfrastructureOverviewCopernicus,
   title = {Infrastructure {{Overview}} | {{Copernicus}}},
   url = {https://www.copernicus.eu/en/about-copernicus/infrastructure-overview},
@@ -98,6 +116,22 @@
   url = {http://www.ingentaconnect.com/content/10.1505/IFOR.5.3.236.19136},
   urldate = {2025-03-04},
   langid = {english}
+}
+
+@online{kirillovSegmentAnything2023,
+  title = {Segment {{Anything}}},
+  author = {Kirillov, Alexander and Mintun, Eric and Ravi, Nikhila and Mao, Hanzi and Rolland, Chloe and Gustafson, Laura and Xiao, Tete and Whitehead, Spencer and Berg, Alexander C. and Lo, Wan-Yen and Dollár, Piotr and Girshick, Ross},
+  date = {2023-04-05},
+  eprint = {2304.02643},
+  eprinttype = {arXiv},
+  eprintclass = {cs},
+  doi = {10.48550/arXiv.2304.02643},
+  url = {http://arxiv.org/abs/2304.02643},
+  urldate = {2025-05-17},
+  abstract = {We introduce the Segment Anything (SA) project: a new task, model, and dataset for image segmentation. Using our efficient model in a data collection loop, we built the largest segmentation dataset to date (by far), with over 1 billion masks on 11M licensed and privacy respecting images. The model is designed and trained to be promptable, so it can transfer zero-shot to new image distributions and tasks. We evaluate its capabilities on numerous tasks and find that its zero-shot performance is impressive -- often competitive with or even superior to prior fully supervised results. We are releasing the Segment Anything Model (SAM) and corresponding dataset (SA-1B) of 1B masks and 11M images at https://segment-anything.com to foster research into foundation models for computer vision.},
+  pubstate = {prepublished},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning},
+  file = {/Users/kristjanluik/Zotero/storage/T6LHC4UJ/Kirillov et al. - 2023 - Segment Anything.pdf;/Users/kristjanluik/Zotero/storage/MQQ4M2Q3/2304.html}
 }
 
 @article{kroupiDeepConvolutionalNeural2019,
@@ -236,6 +270,41 @@
   eventtitle = {2017 {{IEEE Applied Imagery Pattern Recognition Workshop}} ({{AIPR}})},
   keywords = {AI,artificial intelligence,classification,Classification algorithms,deep learning,Detectors,Feature extraction,image understanding,machine learning,Machine learning,Metadata,recognition,satellite imagery,Satellites,Training},
   file = {/Users/kristjanluik/Zotero/storage/5LKY8JCG/Pritt and Chern - 2017 - Satellite Image Classification with Deep Learning.pdf;/Users/kristjanluik/Zotero/storage/95WUZYT2/8457969.html}
+}
+
+@online{raviSAM2Segment2024,
+  title = {{{SAM}} 2: {{Segment Anything}} in {{Images}} and {{Videos}}},
+  shorttitle = {{{SAM}} 2},
+  author = {Ravi, Nikhila and Gabeur, Valentin and Hu, Yuan-Ting and Hu, Ronghang and Ryali, Chaitanya and Ma, Tengyu and Khedr, Haitham and Rädle, Roman and Rolland, Chloe and Gustafson, Laura and Mintun, Eric and Pan, Junting and Alwala, Kalyan Vasudev and Carion, Nicolas and Wu, Chao-Yuan and Girshick, Ross and Dollár, Piotr and Feichtenhofer, Christoph},
+  date = {2024-10-28},
+  eprint = {2408.00714},
+  eprinttype = {arXiv},
+  eprintclass = {cs},
+  doi = {10.48550/arXiv.2408.00714},
+  url = {http://arxiv.org/abs/2408.00714},
+  urldate = {2025-05-16},
+  abstract = {We present Segment Anything Model 2 (SAM 2), a foundation model towards solving promptable visual segmentation in images and videos. We build a data engine, which improves model and data via user interaction, to collect the largest video segmentation dataset to date. Our model is a simple transformer architecture with streaming memory for real-time video processing. SAM 2 trained on our data provides strong performance across a wide range of tasks. In video segmentation, we observe better accuracy, using 3x fewer interactions than prior approaches. In image segmentation, our model is more accurate and 6x faster than the Segment Anything Model (SAM). We believe that our data, model, and insights will serve as a significant milestone for video segmentation and related perception tasks. We are releasing our main model, dataset, as well as code for model training and our demo.},
+  pubstate = {prepublished},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning},
+  file = {/Users/kristjanluik/Zotero/storage/22JR352Q/Ravi et al. - 2024 - SAM 2 Segment Anything in Images and Videos.pdf;/Users/kristjanluik/Zotero/storage/Y93WXMU8/2408.html}
+}
+
+@online{rongMPGSAM2Adapting2025,
+  title = {{{MPG-SAM}} 2: {{Adapting SAM}} 2 with {{Mask Priors}} and {{Global Context}} for {{Referring Video Object Segmentation}}},
+  shorttitle = {{{MPG-SAM}} 2},
+  author = {Rong, Fu and Lan, Meng and Zhang, Qian and Zhang, Lefei},
+  date = {2025-03-10},
+  eprint = {2501.13667},
+  eprinttype = {arXiv},
+  eprintclass = {cs},
+  doi = {10.48550/arXiv.2501.13667},
+  url = {http://arxiv.org/abs/2501.13667},
+  urldate = {2025-05-16},
+  abstract = {Referring video object segmentation (RVOS) aims to segment objects in a video according to textual descriptions, which requires the integration of multimodal information and temporal dynamics perception. The Segment Anything Model 2 (SAM 2) has shown great effectiveness across various video segmentation tasks. However, its application to offline RVOS is challenged by the translation of the text into effective prompts and a lack of global context awareness. In this paper, we propose a novel RVOS framework, termed MPG-SAM 2, to address these challenges. Specifically, MPG-SAM 2 employs a unified multimodal encoder to jointly encode video and textual features, generating semantically aligned video and text embeddings, along with multimodal class tokens. A mask prior generator utilizes the video embeddings and class tokens to create pseudo masks of target objects and global context. These masks are fed into the prompt encoder as dense prompts along with multimodal class tokens as sparse prompts to generate accurate prompts for SAM 2. To provide the online SAM 2 with a global view, we introduce a hierarchical global-historical aggregator, which allows SAM 2 to aggregate global and historical information of target objects at both pixel and object levels, enhancing the target representation and temporal consistency. Extensive experiments on several RVOS benchmarks demonstrate the superiority of MPG-SAM 2 and the effectiveness of our proposed modules.},
+  langid = {english},
+  pubstate = {prepublished},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  file = {/Users/kristjanluik/Zotero/storage/K47BGDRN/Rong et al. - 2025 - MPG-SAM 2 Adapting SAM 2 with Mask Priors and Global Context for Referring Video Object Segmentatio.pdf}
 }
 
 @online{S1Applications,

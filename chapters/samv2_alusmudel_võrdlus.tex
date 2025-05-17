@@ -1,0 +1,45 @@
+Segment Anything Model 2 (SAM 2) on pildi- ja videosegmentatsiooni ülesannete
+fundamentaalne mudel, mis laiendab esmalt välja töötatud SAM-i  (Kirillov et al., 2023 \cite{kirillovSegmentAnything2023})
+ võimekust staatilistel piltidel ka ajaliselt dünaamilisele
+videomaterjalile. SAM 2 arhitektuur põhineb lihtsal transformeril, millel on
+integreeritud vooguv mälumoodul --- see võimaldab reaalajas töödelda järjestikku
+sisenevaid kaadriseid ja säilitada informatsiooni sihtrühma objektist.
+Mälumoodul hoiab kuni N varasemat kaadrit ning M kasutajapõhist sisendkaadrit,
+mille alusel ennustatakse masklete'e (masklet = objekti mask spatio-temporaalses
+ulatuses). \cite{raviSAM2Segment2024}
+
+SAM v2 põhistruktuur koosneb neljast põhimoodulist, mis töötavad järjestikku, et
+ühendada nii pildist tulenev informatsioon kui ka kasutajapoolne juhis ning
+ajaliselt varasemad tulemused. Esiteks võtab hierarhiline pildikodeerija sisse
+sisendkaadri ja teisendab selle mitme skaalaga
+omadusvektoriteks. Teiseks kodeerib prompt-moodul kasutaja märgitud punkte,
+kaste või maski, et mudel teaks, mida täpselt otsida. Kolmandaks lisab
+mälumoodul iga kaadri puhul salvestatud maski- ja pildiomadused FIFO-põhimõttel
+mälupanka, võimaldades modellel säilitada konteksti eelmistest kaadritest.
+Neljandaks rakendab transformer-põhine tähelepanumehhanism nii jooksva kaadri
+kui ka mälust saadud featuuride vahelise suhtluse, mille tulemuseks antakse
+maskidekooderile täpsed ruumilised vihjed. Lõpuks dekodeerib maskidekooder
+paralelselt kõik saadud sisendid ning ennustab lõpliku objektimaski, mida mudel
+iteratiivselt uuendab ja talletab järgmiste kaadrite jaoks. Selline ülesehitus
+võimaldab SAM v2-l kiiresti ja tõhusalt segmenteerida nii staatilisi pilte kui
+ka videoid, säilitades minimaalse kasutajainteraktsiooni juures detailse täpsuse.
+SAM 2 rakendused katavad laia valikut domeene: meditsiiniline pilditöötlus,
+kaugseire ja satelliitpildi analüüs, liikumisskeeme segmenteerivad uuringud ning
+maskeeritud objektide tuvastamine. \cite{raviSAM2Segment2024}
+
+Artiklis  \glqq MPG-SAM 2: Adapting SAM 2 with Mask Priors and Global Context for Referring Video Object Segmentation\grqq{} kohandati SAM V2 mudelit viitematerjalidel põhinevaks
+videoobjektide segmentimiseks (RVOS). Teadlased lõid multimodaalse enkooderi,
+mis ühendas video- ja tekstipõhiseid tunnuseid, ning kasutasid maskide
+eelgeneraatoreid globaalse konteksti kaardistamiseks. Uuenduslik hierarhiline
+ajalooline agregeerimismoodul võimaldas SAM 2-l säilitada objekti kontuure läbi
+videokaadrite, parandades ajaliselt järjepidevat segmentatsiooni. Katsetused
+mitmetel RVOS andmestikel näitasid märgatavat täpsuse kasvu võrreldes varasemate
+meetoditega. \cite{rongMPGSAM2Adapting2025}
+
+Artiklis \glqq SAM2 for abdomen: One-shot and no finetuning\grqq{} esitletakse SAM2 ja Emb-SAM
+ meetodite kombinatsiooni, mis võimaldab
+kõhuelundite segmentatsiooni CT (\textit{computed tomography}) kujutistel, kasutades ainult ühte märgistatud
+pilti. SAM2 käsitleb järjestikuseid CT-viilusid kui videosarju ning
+propagatsioon toimub maskimälu kaudu. Emb-SAM täiendab protsessi, luues täpseid
+pseudo-märkeid iseenesliku õppimisega. Tulemused BTCV andmestikul näitavad
+tugevat segmentatsioonitäpsust, minimeerides käsitsi sekkumise vajadust. \cite{hwangSAM2AbdomenOneshot2024}
