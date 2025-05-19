@@ -81,6 +81,21 @@ kindel lainepikkuse vahemik, mida spetsiifiliste filtrite abil eraldatakse. \cit
     \label{tab:s2bands}
 \end{longtable}
 
+Ribade kombinerimine võimaldab luua erinevaid indekseid, mis aitavad
+eristada erinevaid maapinna omadusi. Näiteks kasutades lähiinfrapunariba saab luua \textbf{NGR}i indeksi, mis põhineb lähi-infrapuna (LIF), rohelise ja punase kanali järjestusel (tähistatakse LRP), kuvab LIF-signaali punases kanalis, rohelise kanal jääb roheliseks ning punane kanal esitatakse sinisena. Selle tulemusel on tervislik taimestik piltidel eredalt punane, kuna rohelised lehed peegeldavad tugevalt lähi-infrapuna spektri osa. Veekogud, mis neelavad nii nähtavat valgust kui ka lähi-infrapuna, ilmuvad tumedana, mullad ja ehituspinnad, mille peegeldus on mõõdukas kõigis kanalites, võtavad omale hallika või kõikuva tooni. Selline komposiit võimaldab metsanduses efektiivselt hinnata taimede seisundit ja kaardistada metsapiire.
+
+\begin{longtable}{lp{5cm}l}
+    \hline
+    Objekt & Peegelduse omadused & Kuvatav värv                          \\ 
+    \hline
+    Tervislik taimestik & Kõrge LIF-peegeldus, mõõdukas roheline, madal punane & Ere punane \\
+    Kahjustatud või hõredam taimestik & Madalam LIF-peegeldus & Pruunikas või roosakas \\
+    Veekogud & 	Nii nähtav kui lähi-infrapuna valgus neelatakse & Tume sinine kuni must \\
+    Paljas muld / linnapinnad & Mõõdukas peegeldus kõigis kanalites & Hallikas, tan või tsüaan\\
+    \caption{NGR indeksi värvi kasutusjuhend}
+    \label{tab:NGR_kasutus}
+\end{longtable}
+
 \subsection{Koordinaatsüsteemid ja CRS}
 Satelliidilt saadud andmete maapinnaga sidumiseks on vaja kasutatada koordinaatsüsteeme ja
 koordinaatide viite süsteeme (CRS).

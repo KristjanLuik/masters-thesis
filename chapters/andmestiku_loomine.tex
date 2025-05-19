@@ -40,6 +40,88 @@ Magistritöö peamiseks uurimisküsimuseks on, kas ja kuidas on võimalik kasuta
     \label{fig:kmeans}
 \end{figure}
 
+
+Peale selle etapi lõppu, kus on loodud 100 raie ümbrust, kuid need on poligonidena. Edasi kirjeldatakse lahti sammud, välja toodud joonisel Joonis \ref{fig:terveflow}, et saada nendega seonduvad satelliidi pildid.
+
+Kuna andmete päring ja töötlemine nõudis suurt arvutus- ja salvestusressurssi,
+algas töö ühe üksiku lageraie piirkonna ja selle vahetu ümbruse salvestamisega
+ühte .shp-vormingus vektorfaili. Edasiste testide käigus selgus, et optimaalne
+lähenemine hõlmab 10--15 lageraie ala ning nende ümbruste sõltumatut päringut ja
+salvestamist eraldi shape-failidena. Selle põhjal viidi läbi järgnev töölõikude
+jadastik:
+\begin{enumerate}[topsep=1pt,itemsep=1ex,partopsep=1ex,parsep=1ex]
+
+\item \textbf{Shape-failide loomine ja kokkuliitmine}\newline
+Iga lageraie piirkonna ja selle vahetu
+ümbruse (buffer) geomeetria päriti riiklikust puistuandmebaasist ja salvestati
+iseseisvatesse shapefile'idesse. Selle lähenemise eeliseks oli võimalus
+vajalikke alasid hõlpsalt lisada või eemaldada ilma terve andmestiku
+ümberlaadimiseta. Paremaks haldamiseks ja analüütiliseks töötluseks liideti kõik
+eraldi genereeritud shapefile'id  tervikusse, mis võimaldas
+vektorandmete ühtlustatud töötlemist järgmistes etappides.
+
+\item \textbf{Piltide päring Sentinel-2 andmebaasist} \newline
+Iga shape-failiga määratletud lageraie
+ala serva puhvrina genereeriti ristkülikukujuline ``kast'' (bounding box), mis
+täielikult kataks huvipakkuva piirkonna. Selle kasti geomeetria alusel loodi
+päring Sentinel-2 metadatebaasist, eesmärgiga leida piirkonnale vastav optiline
+satelliitpilt. Päringule lisati järgmised piirangud:
+
+\begin{enumerate}
+
+\item \textbf{Ajapiirang}: pildistamise kuupäev peab jääma lageraie teadmisest alates kuni 40
+päeva jooksul, tagamaks muutuste jälgitavuse tuvastamise võimalikult värskel
+materjalil.
+
+\item \textbf{Pilvekatte piirang}: pilt valiti vastavalt väikseimale keskmisele pilvekattele,
+et maksimeerida nähtavust ja andmete kvaliteeti.
+\end{enumerate}
+
+Kui sobiliku satelliitpilti nimetatud tingimustel ei leitud,
+laiendati ajavahendit ning tõsteti lubatavat pilvekatte protsenti kuni eelnevalt
+määratud lävendeni. Sel juhul, kui sobivat pildistust ikkagi ei tuvastatud,
+alustati protsess uuesti järgmise lageraie piirkonnaga samas klastris, et tagada
+piisavalt andmepunktide hulk analüüsi teostamiseks.
+
+\item \textbf{Andmete allalaadimine ja eeltöötlus} \newline
+ Sobiva Sentinel-2 toote puhul laaditi
+vastav .SAFE kataloog alla. Sentineli toode sisaldab üheskoos nii optilisi riba-
+(band) kui ka metadatastruktuure, mis on vajalikud edasiseks detailseks
+analüüsiks. Eriti olulised on:
+
+\begin{enumerate}
+\item \textbf{Spektraalsed ribad} (sh paindliku dünaamikaga B02--B12 ja veespetsiifilised B8,
+B8A), mis võimaldavad eristada metsaobjekte ja maapinnanähtusi.
+
+\item \textbf{Pilve- ja lumeindeksiriba (B10)}, mis lihtsustab pilvisuse automaatset
+tuvastamist ning tagab eeltöötlemisel täpsema piirkondliku pilvete kaardistamise.
+\end{enumerate}
+
+\item \textbf{Atmosfääriline korrektsioon ja lõikamine} \newline
+Kõigilt valitud optilistelt ribadelt
+viidi läbi atmosfääriline korrektsioon, kasutades Sentinel-2 töötlemise
+standardalgoritmi (Sen2Cor või QGIS'i lahtise lähtekoodiga moodul), et eemaldada
+atmosfäärist tulenevad häired (nt aerosoolid, gaasiline neeldumine). Pärast
+korrektsiooni genereeriti rasterfailide (level-2A) baasil täpsed TIFF-vormingus
+pildid, kus iga kanal (band) on salvestatud eraldi kihina, säilitades
+kooskõlastatud ruum- ja spektraalset täpsust.
+
+\item \textbf{Huvipiirkondade täpne väljavõtmine} \newline
+Lõpuks lõigati korrektsioneeritud
+piltidelt välja eelnevalt genereeritud kastide ulatuses täpsed rasterfragmendid,
+et töödelda vaid huvipakkuvaid alasid. Selline meetod tagab, et iga lageraie
+objekt ja selle ümbrus on rasterandmes täpselt isoleeritud, mis lihtsustab
+edasist masinõppe- ja analüüsitöötlust. Lõppfailid salvestati
+georeferentseeritud GeoTIFF-idena, mis toetavad mitmetasandilisi kanalivaateid
+ja on integreeritavad GIS-keskkondadesse.
+
+\end{enumerate}
+Käesolev töövoog võimaldas optimeerida andmekäitluse ressursikasutust, tagada
+piltide kõrge kvaliteedi ning kindlustada, et iga lageraie piirkonnast on saadud
+piisav hulk informatsiooni edaspidiseks statistiliseks ja mudelipõhisteks
+analüüsideks.
+
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\textwidth]{figures/andmestik/andmete_voog.drawio.png}
@@ -48,4 +130,36 @@ Magistritöö peamiseks uurimisküsimuseks on, kas ja kuidas on võimalik kasuta
 \end{figure}
 
 \subsection{Raie piirkonna maskide loomine}
-Need sammud mis Liis teeb kui valideerib maske.
+Selles peatükis käsitletakse andmete maskimist, kunag metsaregistrist saadud andmed pole piisavalt täpsed, et neid otse kasutada masinõppes, siis sai loodud sammud, et neid täpsemaks muuta. Terviklik dokument on  töö lisade hulgas.
+
+Eesmärk oli luua dokument, mis aitaks kõigil kasutajatel luua vektormaske kasutades selleks enne mainitud QGISi tarkvara. Selleks et anda parem hinnang pildil olevatele aladele on kasutusel võetud kihid. Kaks peamist kihti on:
+\begin{itemize}[topsep=1pt,itemsep=1ex,partopsep=1ex,parsep=1ex]
+    \item \textbf{Metsateatised} --- andmed, mis on saadud riiklikust metsaregistrist ja sisaldavad teavet metsateatise esitamise kuupäeva, metsateatise menetlemise kuupäeva, metsateatise kehtivuse alguskuupäeva ja metsateatise kehtivuse lõppkuupäeva kohta. Selle info abil saab kindlaks teha, kas üldse on vaja märgendada antud piirkonda.
+    \item \textbf{Ortofotod} --- on kõrge eraldusvõimega õhust tehtud fotod, mis on georeferentseeritud ja millel on täpselt määratletud koordinaadid. Ortofotod võimaldavad täpset analüüsi ja hindamist, et tuvastada metsade seisundit ja muudatusi. Ortofotod tehakse harvemini ja mitte alati üle terve Eesti, kuid need on vajalikud, et saada täpsemat teavet metsade seisundi kohta. Ortofotod on saadaval erinevates spektraalsetes ribades, sealhulgas nähtavas ja infrapunases spektris, mis võimaldab analüüsida erinevaid maapinna omadusi. Käesolevas töös kasutati nii RGB kui ka CIR-NIR ortofotod, mis võimaldavad analüüsida erinevaid maapinna omadusi. 
+\end{itemize}
+
+Teiseks on dokumendis toodud välja juhtnöörid ja soovitused, mida peaks järgima
+maskide loomisel. Järgnevalt on välja toodud mõned näidised, mis illustreerivad ortofotode ja Sentinel-2 piltide erinevusi, seega on tähtis et orotfotosi kautatakse juhtnööridena aga mitte põhitõena. Samuti varem välja toodud andmete kvaliteet mängib suurt rolli, et kui maskimise käigus on kahtlusi klassi tuvastamises, siis jäetakse need alati välja.
+
+Joonistel Joonis \ref{fig:sent_mask_naidis}, Joonis \ref{fig:orto_mask_naidis} ja Joonis \ref{fig:orto_nir_mask_naidis} on välja toodud näidised, mis illustreerivad Sentinel-2 saadud pilti ja selle sama piirkonna orotfotosi. NGR värvi tõlgendused on toodud välja varasemas peatükis \ref{chapter:taust} tabelis Tabel \ref{tab:NGR_kasutus}. Orantšiga on välja toodud piirkond, mis  sateliidi pildil märgiks lageraieks, RGB aerofoto samuti viitab sellele. NGR pildil on ka näha tsüaan tooni, mis viitab sellele et seal peaks olema mulda, ehk tähendaks lageraiet. Siin õib ka välja tuua selle et ortofotode ja Sentinel-2 piltide vahel on ajaline erinevus ja olgugi et ortofotol on selgesti Orantšis kastis 2 lageraiet, siis Sentinel-2 pildil saab märgita ainult ühe. Metsa näidis on toodud välja rohelise kastiga, mis on kõigil kolmel pildil suuresti ühtlane katuvus. Eraldi on piltidel kollase kastiga toodud välja heinamaa piirkond, need on alad mis kaugel võivad ka tunduda lageraie alana, aga kui vaadata lähemalt NGR pilti, siis on näha et seal on väheml seda mullast värvi, mis viitab sellele, et seal võiks põld asuda.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\textwidth]{figures/andmestik/tuvastamis_sent2_naidis.drawio.png}
+    \caption{Sentinel-2 RGB näidis}
+    \label{fig:sent_mask_naidis}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\textwidth]{figures/andmestik/tuvastamis_orto_naidis.drawio.png}
+    \caption{RGB ortofoto näidis}
+    \label{fig:orto_mask_naidis}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\textwidth]{figures/andmestik/tuvastamis_orto_nir_naidis.drawio.png}
+    \caption{CIR-NGR ortofoto näidis}
+    \label{fig:orto_nir_mask_naidis}
+\end{figure}
