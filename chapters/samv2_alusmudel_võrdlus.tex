@@ -5,8 +5,7 @@ videomaterjalile. SAM 2 arhitektuur põhineb lihtsal transformeril, millel on
 integreeritud vooguv mälumoodul --- see võimaldab reaalajas töödelda järjestikku
 sisenevaid kaadriseid ja säilitada informatsiooni sihtrühma objektist.
 Mälumoodul hoiab kuni N varasemat kaadrit ning M kasutajapõhist sisendkaadrit,
-mille alusel ennustatakse masklete'e (masklet = objekti mask spatio-temporaalses
-ulatuses). \cite{raviSAM2Segment2024}
+mille alusel ennustatakse masklet'e (masklet = objekti mask ruumilis-ajalises ulatuses). \cite{raviSAM2Segment2024}
 
 SAM v2 põhistruktuur koosneb neljast põhimoodulist, mis töötavad järjestikku, et
 ühendada nii pildist tulenev informatsioon kui ka kasutajapoolne juhis ning
@@ -15,17 +14,17 @@ sisendkaadri ja teisendab selle mitme skaalaga
 omadusvektoriteks. Teiseks kodeerib prompt-moodul kasutaja märgitud punkte,
 kaste või maski, et mudel teaks, mida täpselt otsida. Kolmandaks lisab
 mälumoodul iga kaadri puhul salvestatud maski- ja pildiomadused FIFO-põhimõttel
-mälupanka, võimaldades modellel säilitada konteksti eelmistest kaadritest.
+mälupanka, võimaldades mudelil säilitada konteksti eelmistest kaadritest.
 Neljandaks rakendab transformer-põhine tähelepanumehhanism nii jooksva kaadri
-kui ka mälust saadud featuuride vahelise suhtluse, mille tulemuseks antakse
+kui ka mälust saadud tunnustevahelise suhtluse, mille tulemuseks antakse
 maskidekooderile täpsed ruumilised vihjed. Lõpuks dekodeerib maskidekooder
-paralelselt kõik saadud sisendid ning ennustab lõpliku objektimaski, mida mudel
+paralleelselt kõik saadud sisendid ning ennustab lõpliku objektimaski, mida mudel
 iteratiivselt uuendab ja talletab järgmiste kaadrite jaoks. Selline ülesehitus
 võimaldab SAM v2-l kiiresti ja tõhusalt segmenteerida nii staatilisi pilte kui
 ka videoid, säilitades minimaalse kasutajainteraktsiooni juures detailse täpsuse.
-SAM 2 rakendused katavad laia valikut domeene: meditsiiniline pilditöötlus,
-kaugseire ja satelliitpildi analüüs, liikumisskeeme segmenteerivad uuringud ning
-maskeeritud objektide tuvastamine. \cite{raviSAM2Segment2024}
+SAM 2 rakendused on kasutatav laial valikul valdkondades: meditsiinilises pilditöötluses,
+kaugseires ja satelliitpildi analüüsis, liikumisskeeme segmenteerivates uuringutes ning
+maskeeritud objektide tuvastamisel. \cite{raviSAM2Segment2024}
 
 Artiklis  \glqq MPG-SAM 2: Adapting SAM 2 with Mask Priors and Global Context for Referring Video Object Segmentation\grqq{} kohandati SAM V2 mudelit viitematerjalidel põhinevaks
 videoobjektide segmentimiseks (RVOS). Teadlased lõid multimodaalse enkooderi,
