@@ -1,6 +1,6 @@
-Selleks et tõestada antud magistritöö eesmärki segmenteerida lageraie ja metsa alasi suurte visioonimudelitega, klusterdatakse DinoV2 väljundid, et leida, kas need alad on eristatavad. Selleks on vajalik eksperdiga valideerida ühe lageraie piirkonna alad, et kindel olla, et need vastavad tõele satelliidi pildilt.
+Selleks et tõestada antud magistritöö eesmärki segmenteerida lageraie ja metsa alasi suurte visioonimudelitega, klusterdatakse DinoV2 väljundid, et leida, kas need alad on eristatavad. Selleks on vajalik eksperdiga valideerida ühe lageraie piirkonna alad, et kindel olla, et need vastavad tõele satelliidipildilt.
 
-Joonisel Joonis \ref{fig:näidisSadeliidiPilt} on võetud näidiseks, et viia läbi eksperiment mõistmaks kas mudelid suudavad eristada lageraie ja metsa alasid satelliidi pildilt. Antud Sentinel-2 andmebaasist saadud pilt sai valitud esiteks sellepärast, et see on hea nähtavusega, võimalikult vähe pilvine ja soojemal hooajal, kui pole lund ja puud on lehteis. Teiseks on pilt heaks aluseks, sest sellel on sattunud raie- ja metsapiirkondi kõrvuti.
+Joonisel \ref{fig:näidisSadeliidiPilt} on näidispilt eksperimendist, mille käigus püüti välja selgitada, kas mudelid suudavad eristada lageraie ja metsa alasid satelliidipiltidelt. Antud Sentinel-2 andmebaasist saadud pilt sai valitud esiteks sellepärast, et see on hea nähtavusega, võimalikult vähe pilvine ja soojemal hooajal, kui pole lund ja puud on lehteis. Teiseks on käesolev pilt heaks aluseks, sest sellel on sattunud raie- ja metsapiirkondi kõrvuti, mis võimaldab erinevatesse klassidesse kuuluvate alade üleminekukohti analüüsida.
 
 \begin{figure}[H]
     \centering
@@ -9,7 +9,7 @@ Joonisel Joonis \ref{fig:näidisSadeliidiPilt} on võetud näidiseks, et viia l�
     \label{fig:näidisSadeliidiPilt}
 \end{figure}
 
-Joonisel Joonis \ref{fig:raieInfoMask} on näha lageraie piirkond, mis on toodud välja tumedama roosana, ja metsa piirkond, mis on joonisel heleroosana. Tegemist on aladega, mis on teada Keskkonnaametile ja mille kohta on olemas ka metsateatis. Satelliidi pilt on saadud Sentinel-2 andmebaasist ja sellel on 10 meetrine resolutsioon. Antud pilt on saadud raie teostamise ajast kuni 40 päeva hiljem, seega on see piisavalt värske, et näha ka metsade seisukorda.
+Joonisel \ref{fig:raieInfoMask} on näha lageraie piirkond, mis on toodud välja tumedama roosana, ja metsa piirkond, mis on joonisel heleroosana. Tegemist on aladega, mis on teada Keskkonnaametile ja mille kohta on olemas ka metsateatis. Satelliidipilt on saadud Sentinel-2 andmebaasist ja sellel on kümnemeetrine resolutsioon. Antud pilt on saadud raie teostamise ajast kuni 40 päeva hiljem, seega mahub õigesse ajaraamistikku, et piisavalt täpselt hinnata metsade seisukorda.
 
 \begin{figure}[H]
     \centering
@@ -18,7 +18,7 @@ Joonisel Joonis \ref{fig:raieInfoMask} on näha lageraie piirkond, mis on toodud
     \label{fig:raieInfoMask}
 \end{figure}
 
-Joonisel Joonis \ref{fig:raieInfoMask_ekspert} on näha lageraie piirkond, mis on toodud välja tumepunasena ja metsa piirkond, mis on märgitud rohelisega. Ekspert on võtnud teatistest saadud info aluseks, aga muud infot nagu aerofotod ja teised lainepikuse pildid on samuti kasutatud, et leida täpsemad piirded. Ekspert on leidnud, et antud piirkonnas on ka teisi alasid, mis ei ole lageraie, aga siiski on nad metsad. Samuti on pildil alasid, mis teatistes on märgitud metsaks aga silmaga vaadates kujutab rohkem raiet. Seega on eksperdi poolt loodud mask palju täpsem ja seetõttu on eksperdi kaasamine vajalik andmestiku loomise protsessis.
+Joonisel \ref{fig:raieInfoMask_ekspert} on näha lageraie piirkond, mis on toodud välja tumepunasena ja metsa piirkond, mis on märgitud rohelisega. Ekspert on võtnud metsateatistest saadud info alade tuvastamisel aluseks, aga sellele lisaks kasutas ta ka muud teavet nagu ortofotosid ja erinevate lainepikkuste pilte, et leida täpsemad piirded metsade ja raiealade vahel. Ekspert on leidnud, et antud piirkonnas leidub alasid, mis ei vasta metsateatistes märgendatud infole. Näiteks on pildil alasid, mis teatistes on märgitud metsaks, aga silmaga vaadates kujutab hoopis raiet ja ka vastupidi. Seega on eksperdi poolt loodud mask palju täpsem ja seetõttu oli eksperdi kaasamine vajalik andmestiku loomise protsessis.
 
 \begin{figure}[H]
     \centering
@@ -27,10 +27,10 @@ Joonisel Joonis \ref{fig:raieInfoMask_ekspert} on näha lageraie piirkond, mis o
     \label{fig:raieInfoMask_ekspert}
 \end{figure}
 
-Järgneval joonisel Joonis \ref{fig:segmenteeritudPealiskiht}, rakendati klastrianalüüsi süvaõppemudelist saadud
+Järgneval joonisel \ref{fig:segmenteeritudPealiskiht}, rakendati klastrianalüüsi süvaõppemudelist saadud
 kõrgdimensionaalsetele tunnusevektoritele, mis esindavad sisendpildi
 diskreetseid paiku. Eelkõige kasutati k-keskmise algoritmi, et grupeerida need
-tunnusevektorid sarnaste semantiliste omaduste alusel. Iga pildilaigule vastav
+tunnusevektorid sarnaste semantiliste omaduste alusel. Igale pildilaigule vastav
 tunnusevektor määrati ühte eelnevalt defineeritud arvu klastritesse, mille
 tulemusena saadi diskreetne klastermärgis iga pildipaiga jaoks. Seejärel
 visualiseeriti saadud klastermärgis pildil värvilise maskina, kus iga klaster on
@@ -44,7 +44,7 @@ esitatud unikaalse värviga, võimaldades seeläbi kvalitatiivselt hinnata mudel
     \label{fig:segmenteeritudPealiskiht}
 \end{figure}
 
-Joonisel Joonis \ref{fig:tsneDinoPatchEmbedings} on rakendatud klassipõhist klasterdamise meetodit, mille eesmärk on luua
+Joonisel \ref{fig:tsneDinoPatchEmbedings} on rakendatud klassipõhist klasterdamise meetodit, mille eesmärk on luua
 pildimaterjalist semantiliselt sidusaid piirkondi, grupeerides pildi elemendid
 eelnevalt defineeritud klassifikatsioonikategooriate alusel. Lähtudes mudeli
 genereeritud klassifikatsiooniväljunditest, määratakse iga pildielement kõige
@@ -63,4 +63,4 @@ esile objektide ja piirkondade klassipõhised seosed. Pildil on väljatoodud kla
     \label{fig:tsneDinoPatchEmbedings}
 \end{figure}
 
-Siit on näha, et lageraie ja mets on eristatavad ja annavad alust edasi uurida, mis alusmudelid suudavad paremini eristada lageraie ja metsa alasid.
+Siit võis näha, et lageraie ja mets on eristatavad ja annavad alust edasi uurida, millised alusmudelid suudavad paremini eristada lageraie ja metsa alasid.
