@@ -1,0 +1,293 @@
+Selles lõigus tutvustame lühidalt kasutatud aluspõhimõtteid ja arhitektuure:
+ResNet34, ResNet50 ning MobileNetV2 kodeerijad, optimeerijad Adam ja AdamW ning
+segmentatsioonipead U-Net, DeepLabv3 ja FPN\@. ResNet-põhised arhitektuurid
+rakendavad jääkühikuid, mis võimaldavad väga sügavate võrkude stabiilset
+treenimist. MobileNetV2 kasutab pööratud jääkühikuid ja lineaarseid pudelikaelu,
+et tagada mobiilsete seadmete jaoks kõrge efektiivsus . Adam-optimeerija pakub
+adaptatiivseid esimest ja teist momenti põhinevaid õppemäärade uuendusi , samas
+kui AdamW eraldab kaalude hääbumise gradientiuuendusest . U-Net koosneb
+kokkutõmbuvast ja laienevast teest , DeepLabv3 kasutab atrooskonvolutsioone ning
+astrusruumilist pirnikogumit (ASPP), ning FPN loob mitmetasandilise omaduskaardi
+püramiidi, mis sobitub hästi kõrge lahutusvõimega satelliitpiltidega. Väärtuste
+kombineerimine ja ulatuslik hüperparameetrite otsing erinevate kodeerijate,
+optimeerijate ja segmentatsioonipeade vahel annab võimaluse modelleerimisel
+täpsust ja efektiivsust optimeerida.
+
+\textbf{Kodeerijad (Encoders)}
+
+\textbf{ResNet34}
+
+ResNet34 on 34-kihiline sügav närvivõrk, mis põhineb VGG-19 inspireeritud „plain” arhitektuuril, kuhu on lisatud jääkühikud (residual blocks) ([GeeksforGeeks][1]). Iga jääkühik sisaldab kahe või enama konvolutsioonikihti, mille väljund liidetakse sisendiga „lünkühenduse” (skip connection) kaudu, mis aitab vältida gradientide kadu väga sügavate võrkude puhul ([viso.ai][8]). Spetsiifiliselt ResNet34 puhul on kasutusel järjestus 3×3 konvolutsioone ning iga lünkühik korrigeerib sisendi ja väljundi vahelist erinevust, võimaldades algset teavet säilitada.
+
+
+\begin{figure}[H]
+    \centering
+    % === ResNet34 Residual Block ===
+    \begin{tikzpicture}[node distance=8mm, auto, >=Stealth]
+    % Nodes
+    \node (input)   [draw, rectangle]                  {Sisendomadused};
+    \node (conv1)   [draw, rectangle, below=of input]  {3×3 Conv + BN + ReLU};
+    \node (conv2)   [draw, rectangle, below=of conv1]  {3×3 Conv + BN};
+    \node (add)     [draw, circle, right=of conv2, xshift=16mm] {+};
+    \node (relu)    [draw, rectangle, below=of add]    {ReLU};
+    \node (output)  [draw, rectangle, below=of relu]   {Väljund};
+    
+    % Arrows
+    \draw[->] (input) -- (conv1);
+    \draw[->] (conv1) -- (conv2);
+    \draw[->] (conv2) -- (add.west);
+    \draw[->] (input.east) to[out=0, in=90] (add.north);
+    \draw[->] (add) -- (relu);
+    \draw[->] (relu) -- (output);
+    \end{tikzpicture}
+
+    \caption{ResNet34 jääkühikust skeem}
+    \label{fig:ResNet34jääkühikust}
+\end{figure}
+
+\textbf{ResNet50}
+
+ResNet50 laiendab jääkühikute ideed kolmik-kihiliste pudelikaelablokkidega: 1×1 konvolutsioon vähendab dimensiooni, 3×3 konvolutsioon töötleb omadusi ja 1×1 konvolutsioon taastab dimensiooni ([Medium][9]). See arhitektuur võimaldab sügavust tõsta 50 kihini, hoides samal ajal arvutuskoormust kontrolli all ([viso.ai][8]). Põhimõte on sama – lünkühendus ühendab sisendi väljundiga, et säilitada gradientide voo kogu võrgu ulatuses.
+
+% === 1. U-Net segmentatsioonipea ===
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}[node distance=8mm, auto, >=stealth]
+    % Nodes
+    \node (input) [draw, rectangle] {Sisendomadused};
+    \node (conv1) [draw, rectangle, below=of input] {1×1 Conv};
+    \node (conv3) [draw, rectangle, below=of conv1] {3×3 Conv + ReLU × n};
+    \node (conv1b) [draw, rectangle, below=of conv3] {1×1 Conv};
+    \node (upsample) [draw, rectangle, below=of conv1b] {Upsample ×2};
+    \node (concat) [draw, rectangle, below=of upsample] {Concat (encoder-layer)};
+    \node (finalconv) [draw, rectangle, below=of concat] {3×3 Conv + ReLU};
+    \node (output) [draw, rectangle, below=of finalconv] {Ennustatud mask};
+
+    % Arrows
+    \draw[->] (input) -- (conv1);
+    \draw[->] (conv1) -- (conv3);
+    \draw[->] (conv3) -- (conv1b);
+    \draw[->] (conv1b) -- (upsample);
+    \draw[->] (upsample) -- (concat);
+    \draw[->] (concat) -- (finalconv);
+    \draw[->] (finalconv) -- (output);
+    \end{tikzpicture}
+    \caption{ResNet50 jääkühikust skeem}
+    \label{fig:ResNet50jääkühikust}
+\end{figure}
+
+\textbf{MobileNetV2}
+
+MobileNetV2 on kavandatud eelkõige mobiilseadmete jaoks, kasutades pööratud jääkühikuid ja lineaarseid pudelikaelu ([arxiv.org][2]). Pööratud jääkühikud algavad kitsast sisendkanalist, laiendavad omaduste ruumi läbi 1×1 konvolutsiooni, töötlevad seda 3×3 süvendkonvolutsiooniga (depthwise convolution) ja vähendavad seejärel lineaarse pudelikaelaga dimensiooni ([openaccess.thecvf.com][10]). Lineaarne aktivatsioon pudelikaelal aitab vältida teabekadu kitsas kanaliruumis.
+
+\begin{figure}[H]
+    \centering
+    % === MobileNetV2 Inverted Residual Block ===
+    \begin{tikzpicture}[node distance=8mm, auto, >=Stealth]
+    % Nodes
+    \node (input)   [draw, rectangle]                    {Sisendomadused\,($d$ kanalit)};
+    \node (exp1x1)  [draw, rectangle, below=of input]    {1×1 Conv, Expansioon $\times t$};
+    \node (dw3x3)   [draw, rectangle, below=of exp1x1]    {3×3 Depthwise Conv + BN + ReLU6};
+    \node (proj1x1) [draw, rectangle, below=of dw3x3]     {1×1 Conv, Projektsioon}; 
+    \node (output)  [draw, rectangle, below=of proj1x1]   {Väljund\,($d'$ kanalit)};
+    
+    % Skip connection if strides=1
+    \node (add)     [draw, circle, right=of dw3x3, xshift=16mm] {+};
+    
+    % Arrows
+    \draw[->] (input)   -- (exp1x1);
+    \draw[->] (exp1x1)  -- (dw3x3);
+    \draw[->] (dw3x3)   -- (proj1x1);
+    \draw[->] (proj1x1) -- (output);
+    
+    % Optional skip
+    \draw[->] (input.east) to[out=0, in=90] (add.north);
+    \draw[->] (dw3x3.east) to[out=0, in=180] (add.west);
+    \draw[->] (add) -- (proj1x1);
+    \end{tikzpicture}
+
+    \caption{MobileNetV2 jääkühikust skeem}
+    \label{fig:MobileNetV2jääkühikust}
+\end{figure}
+
+\textbf{Optimeerijad}
+
+\textbf{Adam}
+
+Adam (Adaptive Moment Estimation) on gradientipõhine optimeerija, mis kombineerib RMSProp-i ja momentum‘i eelised, kasutades kohandatud momentide hinnanguid ([arxiv.org][3]). Esimene moment (keskmine) ja teine moment (ruutkeskmine) hinnatakse eksponentsiaalse libiseva keskmisena, mis võimaldab õppemäära dünaamilist kohandamist igakaalu tasemel ([arxiv.org][11]). Adam on efektiivne suurte ja/või mürarohkete gradientide tingimustes ning vajab tavaliselt vähe hüperparameetrite häälestust.
+
+\textbf{AdamW}
+
+AdamW täiustab Adam-i, eraldades kaalude hääbumise (weight decay) gradientiuuendusest, mis parandab regulaarimist ja üldist jõudlust ([arxiv.org][4]). Kaalude hääbumine lisatakse otse update -sammule, mitte gradientide skaleerimise kaudu, tagades korrektse L2-regularisatsiooni teostuse ([paperswithcode.com][12]). See lahendab Adam-i algupärase L2 regulaarimise ühilduvusprobleemi.
+
+\textbf{Segmentatsioonipead}
+
+\textbf{U-Net}
+
+U-Net koosneb sümmeetrilisest kokkutõmbuva ja laieneva radade (encoder-decoder) architektuurist, kus iga kokkutõmbuv tasand vähendab ruumilist lahutusvõimet ja suurendab tunnuste arv, ning vastupidises laienevas osas ruumiline lahutusvõime taastatakse ([arxiv.org][5]). Lünkühendused ühendavad kokkutõmbuva ja laieneva teekonna vastavad kihid, võimaldades detailse teabe säilimist ([SpringerLink][13]).
+
+ASCII-skeem U-Neti blokist:
+
+```
+%[Sisend] → [Encoder] ───────────┐
+%                             Concat → [Decoder] → [Väljund]
+%[Sisend] → [Encoder] ────┘
+```
+
+\textbf{DeepLabv3}
+
+DeepLabv3 kasutab atrooskonvolutsioone (dilated convolutions) erinevatel kihtidel, et laiendada vastuvõtupiirkonda ilma lahutusvõimet kahjustamata, ning Atrous Spatial Pyramid Pooling (ASPP) moodulit, mis kogub omadusi eri skaala tasanditel ([Medium][6]). See lähenemine võimaldab segmentatsioonil tuvastada objektide piirjooni täpsemalt, eriti keerukates satelliitpiltides ([paperswithcode.com][14]).
+
+% === 2. DeepLabv3 segmentatsioonipea ===
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}[node distance=8mm, auto, >=stealth]
+    % Nodes
+    \node (input) [draw, rectangle] {Sisendomadused};
+    \node (aspp) [draw, rectangle, below=of input, text width=4cm, align=center]
+        {Atrous Spatial Pyramid Pooling\\(rate=6,12,18 + pool)};
+    \node (concat) [draw, rectangle, below=of aspp] {Concat skaalad};
+    \node (conv1) [draw, rectangle, below=of concat] {1×1 Conv};
+    \node (upsample) [draw, rectangle, below=of conv1] {Upsample ×4};
+    \node (conv3) [draw, rectangle, below=of upsample] {3×3 Conv + ReLU};
+    \node (output) [draw, rectangle, below=of conv3] {Ennustatud mask};
+
+    % Arrows
+    \draw[->] (input) -- (aspp);
+    \draw[->] (aspp) -- (concat);
+    \draw[->] (concat) -- (conv1);
+    \draw[->] (conv1) -- (upsample);
+    \draw[->] (upsample) -- (conv3);
+    \draw[->] (conv3) -- (output);
+    \end{tikzpicture}
+    \caption{DeepLabv3 ASPP moodul}
+    \label{fig:DeepLabv3ASPP}
+\end{figure}
+
+
+\textbf{Feature Pyramid Network (FPN)}
+
+FPN loob hierarhilise omaduskaardi püramiidi, kombineerides madalama lahutusvõimega sügavamate kihtide tugevaid semantilisi omadusi kõrgema lahutusvõimega pinnakihtide detailidega ([openaccess.thecvf.com][7]). See sobib eriti hästi kõrge lahutusvõimega satelliitpiltide segmentatsiooniks, kus on oluline korraga töödelda nii suuri objekte kui ka peeneid detaile ([mdpi.com][15]).
+
+% === 3. FPN (Feature Pyramid Network) segmentatsioonipea ===
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=26mm, auto, >=stealth]
+    % Input feature maps
+    \node (c5) [draw, rectangle] {C5};
+    \node (c4) [draw, rectangle, left=of c5] {C4};
+    \node (c3) [draw, rectangle, left=of c4] {C3};
+    \node (c2) [draw, rectangle, left=of c3] {C2};
+
+    % 1x1 Convs
+    \node (p5_1x1) [draw, rectangle, below=of c5] {1×1 Conv};
+    \node (p4_1x1) [draw, rectangle, below=of c4] {1×1 Conv};
+    \node (p3_1x1) [draw, rectangle, below=of c3] {1×1 Conv};
+    \node (p2_1x1) [draw, rectangle, below=of c2] {1×1 Conv};
+
+    % P5 path
+    \node (p5_add) [draw, rectangle, below=of p5_1x1] {Add + Upsample};
+    \node (p5_conv) [draw, rectangle, below=of p5_add] {3×3 Conv};
+    \node (p5) [draw, rectangle, below=of p5_conv] {P5};
+
+    % P4 path
+    \node (p4_add) [draw, rectangle, below=of p4_1x1] {Add + Upsample};
+    \node (p4_conv) [draw, rectangle, below=of p4_add] {3×3 Conv};
+    \node (p4) [draw, rectangle, below=of p4_conv] {P4};
+
+    % P3 path
+    \node (p3_add) [draw, rectangle, below=of p3_1x1] {Add + Upsample};
+    \node (p3_conv) [draw, rectangle, below=of p3_add] {3×3 Conv};
+    \node (p3) [draw, rectangle, below=of p3_conv] {P3};
+
+    % P2 path
+    \node (p2_conv) [draw, rectangle, below=of p2_1x1] {3×3 Conv};
+    \node (p2) [draw, rectangle, below=of p2_conv] {P2};
+
+    % Final concat & conv
+    \node (concat) [draw, rectangle, below=of p3, yshift=-6mm, text width=3cm, align=center]
+        {Concat (P2–P5)};
+    \node (finalconv) [draw, rectangle, below=of concat] {3×3 Conv};
+    \node (output) [draw, rectangle, below=of finalconv] {Ennustatud mask};
+
+    % Connections
+    \foreach \i/\j in {c5/p5_1x1, c4/p4_1x1, c3/p3_1x1, c2/p2_1x1}
+        \draw[->] (\i) -- (\j);
+
+    \draw[->] (p5_1x1) -- (p5_add);
+    \draw[->] (p5_add) -- (p5_conv);
+    \draw[->] (p5_conv) -- (p5);
+
+    \draw[->] (p4_1x1) -- (p4_add);
+    \draw[->] (p4_add) -- (p4_conv);
+    \draw[->] (p4_conv) -- (p4);
+
+    \draw[->] (p3_1x1) -- (p3_add);
+    \draw[->] (p3_add) -- (p3_conv);
+    \draw[->] (p3_conv) -- (p3);
+
+    \draw[->] (p2_1x1) -- (p2_conv);
+    \draw[->] (p2_conv) -- (p2);
+
+    \draw[->] (p2) -- ++(0,-5mm) -| (concat);
+    \draw[->] (p3) -- ++(0,-5mm) -| (concat);
+    \draw[->] (p4) -- ++(0,-5mm) -| (concat);
+    \draw[->] (p5) -- ++(0,-5mm) -| (concat);
+
+    \draw[->] (concat) -- (finalconv);
+    \draw[->] (finalconv) -- (output);
+    \end{tikzpicture}
+    \caption{FPN segmentatsioonipea}
+    \label{fig:FPNsegmentatsioonipea}
+\end{figure}
+
+
+\textbf{Mudelite kombineerimine ja hüperparameetrite häälestus}
+
+Mudelite kombinatsioon sõltub kolmest peamisest komponentist: kodeerijast, optimeerijast ja segmentatsioonipeast. Hüperparameetrite ruumiline uurimine hõlmab kõigi võimalike kombinatsioonide treenimist ning tulemuste võrdlust, mis tagab parima täpsuse ja üldistamisvõime. Hüperparameetrite otsing sisaldas järgmisi seadeid:
+
+%* **Kodeerija**: `resnet34` | `resnet50` | `mobilenet_v2`
+%* **Optimeerija**: `adam` | `adamw`
+%* **Pea**: `unet` | `deeplabv3` | `fpn`
+\begin{longtable}{ll}
+    \hline
+    \textbf{Hüperparameeter} & \textbf{Võimalikud väärtused} \\
+    \hline
+    encoder\_name      & \{resnet34, resnet50, mobilenet\_v2\} \\
+    encoder\_weights   & \{imagenet, None\} \\
+    lr                 & $[1\times10^{-5},\,1\times10^{-3}]$ \\
+    batch\_size        & \{2\} \\
+    optimizer          & \{adam, adamw\} \\
+    head               & \{unet, deeplabv3, fpn\} \\
+    \hline
+    \caption{Hüperparameetrite kombinatsioonid}
+    \label{tab:hyperparameter_kombinatsioonid}
+\end{longtable}
+
+
+Sellise 3 × 2 × 3 kombinatsiooni korral tuleb kokku 18 eraldi mudelit, mida hinnata näiteks IoU (Intersection over Union) ja täpsuse alusel. Treening seisneb esmajärjekorras kodeerija eel-treenitud kaalu lahtipakkimises (transfer learning), seejärel kogu võrgu peenhäälestuses, kasutades sobivat optimeerijat ning õppemäära skeemi (nt kosinustagasilangus).
+
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[node distance=10mm]
+    % sõlmed
+    \node (input)   [block]                     {Sisend\\(RGB pilt)};
+    \node (encoder) [block, below=of input]     {Kodeerija\\(ResNet34/ResNet50/MobileNetV2)};
+    \node (head)    [block, below=of encoder]   {Segmentatsiooni-pea\\(U-Net/DeepLabv3/FPN)};
+    \node (output)  [block, below=of head]      {Maski ennustus\\(Mets vs. lageraie klassid)};
+
+    % nooled
+    \draw[arrow] (input)   -- (encoder);
+    \draw[arrow] (encoder) -- (head);
+    \draw[arrow] (head)    -- (output);
+    \end{tikzpicture}
+    \caption{Mudeli arhitektuuri skeem}
+    \label{fig:model_architecture}
+\end{figure}
+
+\textbf{Järeldused}
+
+Ülaltoodud arhitektuuride ja optimeerijate kombineerimine võimaldab luua segmentatsioonimudeleid, mis suudavad satelliitpilte tõhusalt töödelda ja tuvastada metsasid ning lageraie alasid. ResNet-baasilised kodeerijad pakuvad tugevat omadusloome võimekust, MobileNetV2 lisab efektiivsust piiratud ressursiga kasutuskeskkondades. Adam ja AdamW optimeerijad tagavad stabiilse converge’tumise, samas kui U-Net, DeepLabv3 ja FPN pakuvad erinevaid lähenemisi segmentatsioonipeade ülesehitamiseks. Laialdane hüperparameetrite grid search ning kombineeritud mudelite analüüs annab objektiivse aluse valida kõige sobivam konfiguratsioon metsade ja lageraielõikude tuvastamiseks.
+

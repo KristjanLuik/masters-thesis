@@ -168,3 +168,8 @@
     \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}       % Uses dots for section entries in the TOC
 
     \renewcommand{\cftdotsep}{0.3}                              % Sets the spacing between dots for all entries to 0.3 units
+\usetikzlibrary{arrows.meta, positioning}
+\tikzset{
+  block/.style = {draw, rectangle, minimum width=3cm, minimum height=1cm, align=center},
+  arrow/.style = {thick,->,>=Stealth}
+}
