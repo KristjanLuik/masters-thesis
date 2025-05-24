@@ -1,0 +1,79 @@
+\textbf{Kodeerijad, Optimeerijad ja Segmentatsioonipead}
+
+Töö pea katsealuseks olevad DINO v2 ja SAM v2 eksperimendid erinevad üksteisest nii mudeli
+arhitektuuri, hüperparameetrite otsingu kui ka pea-(head-)komponentide poolest,
+võimaldades võrrelda segmentatsiooni-võimekust erinevates seadistustes.
+
+DINO v2 katse käivitamisel imporditakse esmalt pre-treenitud ViT-backbone'i
+DINO v2 mudelist ja initsialiseeritakse uus DinoV2Segmenter, mille
+dinov2\_backbone\_name-parameetriga valitakse ViT-versioon (näiteks ``small''
+või ``base''). Backbone'i kaalusid on võimalik kas täielikult külmutada või
+lasta neil treeningus uuesti kohanduda (freeze\_backbone=True/False), mis
+võimaldab hinnata nii puhtalt eelõpetatud omaduste kui ka finetuning-lähenemise
+mõju. Peade valik hõlmab kolmest variandist: lihtsat LinearClassifier-pead,
+hierarhilist UPerNetHead-lahendust ning FPN-pead (FPNHead), mis kombineerib
+eri-tasandilisi omaduskaarte püramiidi kujul. Igal peal on omapärane viis,
+kuidas patch-embede'ilt kogutud omadused ümber vormida lõplikuks
+klassi-logit'iteks või täpsemaks semantilise ruumi rekonstruerimiseks.
+Treeningprotsessis kasutatakse optimeerijana AdamW-i ja kadufunktsioonina mudeli
+oma sisend-väljastuse kaotusmõõdikut (outputs.loss), samas kui Optuna
+hüperotsing kontrollib erinevaid õppemäära, backbone`i külmutamise ja pea tüübi
+kombineeritusi. Kõik eksperimendid salvestavad iga tsükli järel nii IoU kui ka
+Dice tulemused ning parimad kontrollpunktid kopeeritakse lõppanalüüsiks.
+
+
+\begin{longtable}{lllll}
+        \textbf{Tunnus} & \textbf{Backbone} & \textbf{Freeze Backbone} & \textbf{Head Type}  & \text{Optimeerija} \\
+        \hline
+        Trial 1 & ViT-small & Yes                    & LinearClassifier  & AdamW \\
+        Trial 2 & ViT-small & Yes                    & UPerNetHead       & AdamW \\
+        Trial 3 & ViT-small & Yes                    & FPNHead           & AdamW \\
+        Trial 4 & ViT-small & No                     & LinearClassifier  & AdamW \\
+        Trial 5 & ViT-small & No                     & UPerNetHead       & AdamW \\
+        Trial 6 & ViT-small & No                     & FPNHead           & AdamW \\
+        Trial 7 & ViT-base  & Yes                    & LinearClassifier  & AdamW \\
+        Trial 8 & ViT-base  & Yes                    & UPerNetHead       & AdamW \\
+        Trial 9 & ViT-base  & Yes                    & FPNHead           & AdamW \\
+        Trial 10& ViT-base  & No                     & LinearClassifier  & AdamW \\
+        Trial 11& ViT-base  & No                     & UPerNetHead       & AdamW \\
+        Trial 12& ViT-base  & No                     & FPNHead           & AdamW \\
+        \hline
+    \caption{DINO v2 eksperimendi seadistused}
+    \label{tab:dinov2_experiments}
+\end{longtable}
+
+
+SAM v2 katsed on üles ehitatud Meta ``Segment Anything Model'' teise põlvkonna
+raamistiku põhjal ja kasutavad YAML-konfiguratsiooni, et deklareerida nii
+SamConfig parameetrid kui ka SamModel tüüp. Eksperimendi konfiguratsioonis saab
+samuti määrata backbone'i külmutamise taseme, et võrrelda, kas pildipõhised
+tunnused vajavad täiendavat peenhäälestust. Andmestiku laadimine põhineb .
+pt-failidest kokku kogutud Sentinel-andmetel, mida töödeldakse
+CustomForestryDataset klassi kaudu, et rakendada sobivad pilditransformatsioonid
+(skaleerimine, normaliseerimine jne). Treening- ja valideerimislaadurid töötavad
+batch\_size ning varisemise (drop\_last) parameetrite alusel, seejärel viiakse
+läbi epohhipõhine treening ja valideerimine, kasutades train\_one\_epoch ja
+validate\_one\_epoch funktsioone. Kadufunktsiooniks on klassikaline
+CrossEntropyLoss ning optimeerijaks samuti AdamW. FPN-pea lisamine SAM
+eksperimendis võimaldab sügavamaid võrdlusi, sest nii DINO v2 kui ka SAM v2
+mudelid kasutavad nüüd sama püramiidipõhist pea-arhitektuuri, mis toetab
+peenemat lõpliku segmentatsiooni juhtimist. Lõplik analüüs koondab tulemused
+mudeli konfiguratsioonide, pea-valiku ja backbone'i külmutamise
+kombinatsioonides, et tuvastada kõige tõhusam lähenemine metsastunud ja
+lageraielõikude tuvastamiseks satelliitpiltidelt.
+
+\begin{longtable}{lllll}
+    \textbf{Tunnus} & \textbf{Model Config} & \textbf{Freeze Backbone} & \textbf{Head Type} & \textbf{Optimeerija} \\
+    \hline
+        Trial 1 & default      & Yes                    & MaskDecoder (orig.) & AdamW \\
+        Trial 2 & default      & Yes                    & FPNHead             & AdamW \\
+        Trial 3 & default      & No                     & MaskDecoder (orig.) & AdamW \\
+        Trial 4 & default      & No                     & FPNHead             & AdamW \\
+        Trial 5 & large        & Yes                    & MaskDecoder (orig.) & AdamW \\
+        Trial 6 & large        & Yes                    & FPNHead             & AdamW \\
+        Trial 7 & large        & No                     & MaskDecoder (orig.) & AdamW \\
+        Trial 8 & large        & No                     & FPNHead             & AdamW \\
+    \hline
+    \caption{SAM v2 eksperimendi seadistused}
+    \label{tab:samv2_experiments}
+\end{longtable}

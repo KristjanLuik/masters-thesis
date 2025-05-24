@@ -126,13 +126,11 @@ AdamW täiustab Adam-i, eraldades kaalude hääbumise (weight decay) gradientiuu
 
 U-Net koosneb sümmeetrilisest kokkutõmbuva ja laieneva radade (encoder-decoder) architektuurist, kus iga kokkutõmbuv tasand vähendab ruumilist lahutusvõimet ja suurendab tunnuste arv, ning vastupidises laienevas osas ruumiline lahutusvõime taastatakse ([arxiv.org][5]). Lünkühendused ühendavad kokkutõmbuva ja laieneva teekonna vastavad kihid, võimaldades detailse teabe säilimist ([SpringerLink][13]).
 
-ASCII-skeem U-Neti blokist:
-
-```
+% ASCII-skeem U-Neti blokist:
 %[Sisend] → [Encoder] ───────────┐
 %                             Concat → [Decoder] → [Väljund]
 %[Sisend] → [Encoder] ────┘
-```
+
 
 \textbf{DeepLabv3}
 
