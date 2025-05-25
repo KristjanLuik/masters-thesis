@@ -17,7 +17,7 @@ täpsust ja efektiivsust optimeerida.
 
 \textbf{ResNet34}
 
-ResNet34 on 34-kihiline sügav närvivõrk, mis põhineb VGG-19 inspireeritud „plain” arhitektuuril, kuhu on lisatud jääkühikud (residual blocks) ([GeeksforGeeks][1]). Iga jääkühik sisaldab kahe või enama konvolutsioonikihti, mille väljund liidetakse sisendiga „lünkühenduse” (skip connection) kaudu, mis aitab vältida gradientide kadu väga sügavate võrkude puhul ([viso.ai][8]). Spetsiifiliselt ResNet34 puhul on kasutusel järjestus 3×3 konvolutsioone ning iga lünkühik korrigeerib sisendi ja väljundi vahelist erinevust, võimaldades algset teavet säilitada.
+ResNet34 on 34-kihiline sügav närvivõrk, mis põhineb VGG-19 inspireeritud „plain” arhitektuuril, kuhu on lisatud jääkühikud (residual blocks). Iga jääkühik sisaldab kahe või enama konvolutsioonikihti, mille väljund liidetakse sisendiga „lünkühenduse” (skip connection) kaudu, mis aitab vältida gradientide kadu väga sügavate võrkude puhul. Spetsiifiliselt ResNet34 puhul on kasutusel järjestus 3×3 konvolutsioone ning iga lünkühik korrigeerib sisendi ja väljundi vahelist erinevust, võimaldades algset teavet säilitada.
 
 
 \begin{figure}[H]
@@ -47,7 +47,7 @@ ResNet34 on 34-kihiline sügav närvivõrk, mis põhineb VGG-19 inspireeritud �
 
 \textbf{ResNet50}
 
-ResNet50 laiendab jääkühikute ideed kolmik-kihiliste pudelikaelablokkidega: 1×1 konvolutsioon vähendab dimensiooni, 3×3 konvolutsioon töötleb omadusi ja 1×1 konvolutsioon taastab dimensiooni ([Medium][9]). See arhitektuur võimaldab sügavust tõsta 50 kihini, hoides samal ajal arvutuskoormust kontrolli all ([viso.ai][8]). Põhimõte on sama – lünkühendus ühendab sisendi väljundiga, et säilitada gradientide voo kogu võrgu ulatuses.
+ResNet50 laiendab jääkühikute ideed kolmik-kihiliste pudelikaelablokkidega: 1×1 konvolutsioon vähendab dimensiooni, 3×3 konvolutsioon töötleb omadusi ja 1×1 konvolutsioon taastab dimensiooni. See arhitektuur võimaldab sügavust tõsta 50 kihini, hoides samal ajal arvutuskoormust kontrolli all. Põhimõte on sama – lünkühendus ühendab sisendi väljundiga, et säilitada gradientide voo kogu võrgu ulatuses.
 
 % === 1. U-Net segmentatsioonipea ===
 \begin{figure}[!ht]
@@ -78,7 +78,7 @@ ResNet50 laiendab jääkühikute ideed kolmik-kihiliste pudelikaelablokkidega: 1
 
 \textbf{MobileNetV2}
 
-MobileNetV2 on kavandatud eelkõige mobiilseadmete jaoks, kasutades pööratud jääkühikuid ja lineaarseid pudelikaelu ([arxiv.org][2]). Pööratud jääkühikud algavad kitsast sisendkanalist, laiendavad omaduste ruumi läbi 1×1 konvolutsiooni, töötlevad seda 3×3 süvendkonvolutsiooniga (depthwise convolution) ja vähendavad seejärel lineaarse pudelikaelaga dimensiooni ([openaccess.thecvf.com][10]). Lineaarne aktivatsioon pudelikaelal aitab vältida teabekadu kitsas kanaliruumis.
+MobileNetV2 on kavandatud eelkõige mobiilseadmete jaoks, kasutades pööratud jääkühikuid ja lineaarseid pudelikaelu. Pööratud jääkühikud algavad kitsast sisendkanalist, laiendavad omaduste ruumi läbi 1×1 konvolutsiooni, töötlevad seda 3×3 süvendkonvolutsiooniga (depthwise convolution) ja vähendavad seejärel lineaarse pudelikaelaga dimensiooni. Lineaarne aktivatsioon pudelikaelal aitab vältida teabekadu kitsas kanaliruumis.
 
 \begin{figure}[H]
     \centering
@@ -114,17 +114,17 @@ MobileNetV2 on kavandatud eelkõige mobiilseadmete jaoks, kasutades pööratud j
 
 \textbf{Adam}
 
-Adam (Adaptive Moment Estimation) on gradientipõhine optimeerija, mis kombineerib RMSProp-i ja momentum‘i eelised, kasutades kohandatud momentide hinnanguid ([arxiv.org][3]). Esimene moment (keskmine) ja teine moment (ruutkeskmine) hinnatakse eksponentsiaalse libiseva keskmisena, mis võimaldab õppemäära dünaamilist kohandamist igakaalu tasemel ([arxiv.org][11]). Adam on efektiivne suurte ja/või mürarohkete gradientide tingimustes ning vajab tavaliselt vähe hüperparameetrite häälestust.
+Adam (Adaptive Moment Estimation) on gradientipõhine optimeerija, mis kombineerib RMSProp-i ja momentum‘i eelised, kasutades kohandatud momentide hinnanguid. Esimene moment (keskmine) ja teine moment (ruutkeskmine) hinnatakse eksponentsiaalse libiseva keskmisena, mis võimaldab õppemäära dünaamilist kohandamist igakaalu tasemel. Adam on efektiivne suurte ja/või mürarohkete gradientide tingimustes ning vajab tavaliselt vähe hüperparameetrite häälestust.
 
 \textbf{AdamW}
 
-AdamW täiustab Adam-i, eraldades kaalude hääbumise (weight decay) gradientiuuendusest, mis parandab regulaarimist ja üldist jõudlust ([arxiv.org][4]). Kaalude hääbumine lisatakse otse update -sammule, mitte gradientide skaleerimise kaudu, tagades korrektse L2-regularisatsiooni teostuse ([paperswithcode.com][12]). See lahendab Adam-i algupärase L2 regulaarimise ühilduvusprobleemi.
+AdamW täiustab Adam-i, eraldades kaalude hääbumise (weight decay) gradientiuuendusest, mis parandab regulaarimist ja üldist jõudlust. Kaalude hääbumine lisatakse otse update -sammule, mitte gradientide skaleerimise kaudu, tagades korrektse L2-regularisatsiooni teostuse. See lahendab Adam-i algupärase L2 regulaarimise ühilduvusprobleemi.
 
 \textbf{Segmentatsioonipead}
 
 \textbf{U-Net}
 
-U-Net koosneb sümmeetrilisest kokkutõmbuva ja laieneva radade (encoder-decoder) architektuurist, kus iga kokkutõmbuv tasand vähendab ruumilist lahutusvõimet ja suurendab tunnuste arv, ning vastupidises laienevas osas ruumiline lahutusvõime taastatakse ([arxiv.org][5]). Lünkühendused ühendavad kokkutõmbuva ja laieneva teekonna vastavad kihid, võimaldades detailse teabe säilimist ([SpringerLink][13]).
+U-Net koosneb sümmeetrilisest kokkutõmbuva ja laieneva radade (encoder-decoder) architektuurist, kus iga kokkutõmbuv tasand vähendab ruumilist lahutusvõimet ja suurendab tunnuste arv, ning vastupidises laienevas osas ruumiline lahutusvõime taastatakse. Lünkühendused ühendavad kokkutõmbuva ja laieneva teekonna vastavad kihid, võimaldades detailse teabe säilimist.
 
 % ASCII-skeem U-Neti blokist:
 %[Sisend] → [Encoder] ───────────┐
@@ -134,7 +134,7 @@ U-Net koosneb sümmeetrilisest kokkutõmbuva ja laieneva radade (encoder-decoder
 
 \textbf{DeepLabv3}
 
-DeepLabv3 kasutab atrooskonvolutsioone (dilated convolutions) erinevatel kihtidel, et laiendada vastuvõtupiirkonda ilma lahutusvõimet kahjustamata, ning Atrous Spatial Pyramid Pooling (ASPP) moodulit, mis kogub omadusi eri skaala tasanditel ([Medium][6]). See lähenemine võimaldab segmentatsioonil tuvastada objektide piirjooni täpsemalt, eriti keerukates satelliitpiltides ([paperswithcode.com][14]).
+DeepLabv3 kasutab atrooskonvolutsioone (dilated convolutions) erinevatel kihtidel, et laiendada vastuvõtupiirkonda ilma lahutusvõimet kahjustamata, ning Atrous Spatial Pyramid Pooling (ASPP) moodulit, mis kogub omadusi eri skaala tasanditel. See lähenemine võimaldab segmentatsioonil tuvastada objektide piirjooni täpsemalt, eriti keerukates satelliitpiltides.
 
 % === 2. DeepLabv3 segmentatsioonipea ===
 \begin{figure}[!ht]
@@ -165,7 +165,7 @@ DeepLabv3 kasutab atrooskonvolutsioone (dilated convolutions) erinevatel kihtide
 
 \textbf{Feature Pyramid Network (FPN)}
 
-FPN loob hierarhilise omaduskaardi püramiidi, kombineerides madalama lahutusvõimega sügavamate kihtide tugevaid semantilisi omadusi kõrgema lahutusvõimega pinnakihtide detailidega ([openaccess.thecvf.com][7]). See sobib eriti hästi kõrge lahutusvõimega satelliitpiltide segmentatsiooniks, kus on oluline korraga töödelda nii suuri objekte kui ka peeneid detaile ([mdpi.com][15]).
+FPN loob hierarhilise omaduskaardi püramiidi, kombineerides madalama lahutusvõimega sügavamate kihtide tugevaid semantilisi omadusi kõrgema lahutusvõimega pinnakihtide detailidega. See sobib eriti hästi kõrge lahutusvõimega satelliitpiltide segmentatsiooniks, kus on oluline korraga töödelda nii suuri objekte kui ka peeneid detaile.
 
 % === 3. FPN (Feature Pyramid Network) segmentatsioonipea ===
 
