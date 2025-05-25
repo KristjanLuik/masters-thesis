@@ -1,24 +1,24 @@
 \textbf{Kodeerijad, Optimeerijad ja Segmentatsioonipead}
 
-Töö pea katsealuseks olevad DINO v2 ja SAM v2 eksperimendid erinevad üksteisest nii mudeli
+Uurimisöö põhiosa moodustavad DINO v2 ja SAM v2 segmentatsioonimudelite eksperimendid erinevad üksteisest nii mudeli
 arhitektuuri, hüperparameetrite otsingu kui ka pea-(head-)komponentide poolest,
 võimaldades võrrelda segmentatsiooni-võimekust erinevates seadistustes.
 
-DINO v2 katse käivitamisel imporditakse esmalt pre-treenitud ViT-backbone'i
+DINO v2 katse käivitamisel imporditakse esmalt eeltreenitud ViT-tuumvõrgu (backbone)
 DINO v2 mudelist ja initsialiseeritakse uus DinoV2Segmenter, mille
 dinov2\_backbone\_name-parameetriga valitakse ViT-versioon (näiteks ``small''
-või ``base''). Backbone'i kaalusid on võimalik kas täielikult külmutada või
+või ``base''). Tuumvõrgu kaalusid on võimalik kas täielikult külmutada või
 lasta neil treeningus uuesti kohanduda (freeze\_backbone=True/False), mis
-võimaldab hinnata nii puhtalt eelõpetatud omaduste kui ka finetuning-lähenemise
-mõju. Peade valik hõlmab kolmest variandist: lihtsat LinearClassifier-pead,
-hierarhilist UPerNetHead-lahendust ning FPN-pead (FPNHead), mis kombineerib
+võimaldab hinnata nii puhtalt eelõpetatud omaduste kui ka peenhäälestamisel põhineva lähenemise
+mõju. Peade valikus on kolm erinevat varianti: lihtsat LinearClassifier-pead,
+hierarhiline UPerNetHead-lahendus ning FPN-pea (FPNHead), mis kombineerib
 eri-tasandilisi omaduskaarte püramiidi kujul. Igal peal on omapärane viis,
-kuidas patch-embede'ilt kogutud omadused ümber vormida lõplikuks
-klassi-logit'iteks või täpsemaks semantilise ruumi rekonstruerimiseks.
+kuidas manuspaigalt (patch-embedding) kogutud omadused ümber vormida lõplikuks
+klassi-logititeks või täpsemaks semantilise ruumi rekonstruerimiseks.
 Treeningprotsessis kasutatakse optimeerijana AdamW-i ja kadufunktsioonina mudeli
 oma sisend-väljastuse kaotusmõõdikut (outputs.loss), samas kui Optuna
 hüperotsing kontrollib erinevaid õppemäära, backbone`i külmutamise ja pea tüübi
-kombineeritusi. Kõik eksperimendid salvestavad iga tsükli järel nii IoU kui ka
+kombinatsioone. Kõik eksperimendid salvestavad iga tsükli järel nii IoU kui ka
 Dice tulemused ning parimad kontrollpunktid kopeeritakse lõppanalüüsiks.
 \bigskip
 
@@ -46,7 +46,7 @@ Dice tulemused ning parimad kontrollpunktid kopeeritakse lõppanalüüsiks.
 SAM v2 katsed on üles ehitatud Meta ``Segment Anything Model'' teise põlvkonna
 raamistiku põhjal ja kasutavad YAML-konfiguratsiooni, et deklareerida nii
 SamConfig parameetrid kui ka SamModel tüüp. Eksperimendi konfiguratsioonis saab
-samuti määrata backbone'i külmutamise taseme, et võrrelda, kas pildipõhised
+samuti määrata tuumvõrgu külmutamise taseme, et võrrelda, kas pildipõhised
 tunnused vajavad täiendavat peenhäälestust. Andmestiku laadimine põhineb .
 pt-failidest kokku kogutud Sentinel-andmetel, mida töödeldakse
 CustomForestryDataset klassi kaudu, et rakendada sobivad pilditransformatsioonid
@@ -58,8 +58,8 @@ CrossEntropyLoss ning optimeerijaks samuti AdamW. FPN-pea lisamine SAM
 eksperimendis võimaldab sügavamaid võrdlusi, sest nii DINO v2 kui ka SAM v2
 mudelid kasutavad nüüd sama püramiidipõhist pea-arhitektuuri, mis toetab
 peenemat lõpliku segmentatsiooni juhtimist. Lõplik analüüs koondab tulemused
-mudeli konfiguratsioonide, pea-valiku ja backbone'i külmutamise
-kombinatsioonides, et tuvastada kõige tõhusam lähenemine metsastunud ja
+mudeli konfiguratsioonide, pea-valiku ja tuumvõrgu külmutamise
+kombinatsioonides, et tuvastada kõige tõhusam lähenemine metsa alade ja
 lageraielõikude tuvastamiseks satelliitpiltidelt.
 
 \bigskip
