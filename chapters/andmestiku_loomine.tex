@@ -31,7 +31,7 @@ kontekstis kasutatakse polügoone, et täpselt määratleda geograafilisi alasid
     \label{fig:umbrusexample}
 \end{figure}
 
-Magistritöö peamiseks uurimisküsimuseks on, kas ja kuidas on võimalik kasutada väheste näidete (\textit{Few-Shot}) põhist alusmudelit. Selleks on aga vaja täpseid andmeid millelt õppida. Nagu eelnevalt mainitud siis metsaregistrist saadud andmed ei ole piisavalt täpsed, et neid otse kasutada alusmudeli treenimisel metsaraie tuvastamiseks. Seetõttu lisandusid uurimistöösse andmete täiendava töötlemise ja maskimise etapid, kus andmed käiakse käsitsi läbi, kasutades registri andmeid maski põhjana. Ajalise piirangu tõttu pidi tegema alamvalimi. Et saada Eesti metsade kohta üldisemaid näiteid kasutati selleks KMeans klasterdamise meetodit, et jagada metsad omakorda kahte erinevasse klassi okas- ja lehtpuud. Eesmärgiks oli koguda kokku 100 raiet ja nende ümbrust, et luua piisavalt andmeid, mille pealt mudelit treenida. Kui peaks juhtuma et mõni pilt pole kõlbulik, siis valitakse samas klustrist uus lageraie piirkond.
+Magistritöö peamiseks uurimisküsimuseks on, kas ja kuidas on võimalik kasutada väheste näidete (\textit{Few-Shot}) põhist alusmudelit. Väikese valimi puhul on aga vaja eriti täpseid andmeid millelt õppida. Nagu eelnevalt mainitud siis metsaregistrist saadud andmed ei ole piisavalt täpsed, et neid otse kasutada alusmudeli treenimisel metsaraie tuvastamiseks. Seetõttu lisandusid uurimistöösse andmete täiendava töötlemise ja maskimise etapid, kus andmed käiakse käsitsi läbi, kasutades registri andmeid maski põhjana. Ajalise piirangu tõttu pidi tegema alamvalimi. Et saada Eesti metsade kohta üldisemaid näiteid kasutati selleks KMeans klasterdamise meetodit, et jagada metsad omakorda kahte erinevasse klassi okas- ja lehtpuud. Eesmärgiks oli koguda kokku 100 raiet ja nende ümbrust, et luua piisavalt andmeid, mille pealt mudelit treenida. Kui peaks juhtuma et mõni pilt pole kõlbulik, siis valitakse samas klustrist uus lageraie piirkond.
 
 \begin{figure}[H]
     \centering
@@ -41,7 +41,7 @@ Magistritöö peamiseks uurimisküsimuseks on, kas ja kuidas on võimalik kasuta
 \end{figure}
 
 
-Peale selle etapi lõppu, kus on loodud 100 raie ümbrust, kuid need on polügoonidena. Edasi kirjeldatakse lahti sammud, välja toodud joonisel \ref{fig:terveflow}, et saada nendega seonduvad satelliidi pildid.
+Peale selle etapi lõppu, kus on loodud 100 raie ümbrust polügoonidena. Edasi kirjeldatakse lahti sammud, välja toodud joonisel \ref{fig:terveflow}, et saada nendega seonduvad satelliitpildid.
 
 Kuna andmete päring ja töötlemine nõudis suurt arvutus- ja salvestusressurssi,
 algas töö ühe üksiku lageraie piirkonna ja selle vahetu ümbruse salvestamisega
@@ -78,13 +78,13 @@ et maksimeerida nähtavust ja andmete kvaliteeti.
 \end{enumerate}
 
 Kui sobiliku satelliitpilti nimetatud tingimustel ei leitud,
-laiendati ajavahemikku ning tõsteti lubatavat pilvekatte protsenti kuni eelnevalt
+laiendati ajavahemikku ning tõsteti lubatavat pilvkatte protsenti kuni eelnevalt
 määratud lävendini. Sel juhul, kui sobivat pildistust ikkagi ei tuvastatud,
 alustati protsess uuesti järgmise lageraie piirkonnaga samas klastris, et tagada
 piisav andmepunktide hulk analüüsi teostamiseks.
 
 \item \textbf{Andmete allalaadimine ja eeltöötlus} \newline
- Sobiva Sentinel-2 toote puhul laaditi
+ Sobiva Sentinel-2 toote puhul laeti
 vastav .SAFE kataloog alla. Sentineli toode sisaldab üheskoos nii optilisi riba-
 (band) kui ka metadatastruktuure, mis on vajalikud edasiseks detailseks
 analüüsiks. Eriti olulised on:
@@ -117,7 +117,7 @@ ja on integreeritavad GIS-keskkondadesse.
 
 \end{enumerate}
 Käesolev töövoog võimaldas optimeerida andmekäitluse ressursikasutust, tagada
-piltide kõrge kvaliteedi ning kindlustada, et iga lageraie piirkonnast on saadud
+piltide kõrge kvaliteet ning kindlustada, et iga lageraie piirkonnast on saadud
 piisav hulk informatsiooni edaspidiseks statistiliseks ja mudelipõhisteks
 analüüsideks.
 
@@ -131,7 +131,7 @@ analüüsideks.
 
 
 \subsection{Raie piirkonna maskide loomine}
-Selles peatükis käsitletakse andmete maskimist, kuna metsaregistrist saadud andmed pole piisavalt täpsed, et neid otse kasutada masinõppes, siis sai loodud sammud, et neid täpsemaks muuta. Terviklik dokument on  töö lisade hulgas.
+Selles peatükis käsitletakse andmete maskimist, kuna metsaregistrist saadud andmed pole piisavalt täpsed, et neid otse masinõppes kasutada, siis sai loodud sammud, et andmeid täpsemaks muuta. Terviklik dokument on töö lisade hulgas.
 
 Eesmärk oli luua dokument, mis aitaks kõigil kasutajatel luua vektormaske kasutades selleks enne mainitud QGISi tarkvara. Selleks et anda parem hinnang pildil olevatele aladele on kasutusel võetud kihid. Kaks peamist kihti on:
 \begin{itemize}[topsep=1pt,itemsep=1ex,partopsep=1ex,parsep=1ex]
@@ -140,9 +140,9 @@ Eesmärk oli luua dokument, mis aitaks kõigil kasutajatel luua vektormaske kasu
 \end{itemize}
 
 Teiseks on dokumendis toodud välja juhtnöörid ja soovitused, mida peaks järgima
-maskide loomisel. Järgnevalt on välja toodud mõned näidised, mis illustreerivad ortofotode ja Sentinel-2 piltide erinevusi, seega on tähtis, et orotfotosid kautatakse juhtnööridena aga mitte põhitõena. Masinõppes kasutatavate andmete kvaliteet antud uurimistöösmängib suurt rolli, seega kui maskide loomise käigus tekkis kahtlusi klassi tuvastamises, siis jäeti need alad alati välja.
+maskide loomisel. Järgnevalt on välja toodud mõned näidised, mis illustreerivad ortofotode ja Sentinel-2 piltide erinevusi, seega on tähtis, et orotfotosid kautatakse juhtnööridena aga mitte põhitõena. Masinõppes kasutatavate andmete kvaliteet antud uurimistöös mängib suurt rolli, seega kui maskide loomise käigus tekkis kahtlusi klassi tuvastamises, siis jäeti need alad alati välja.
 
-Joonisel \ref{fig:sent_mask_naidis}, joonisel \ref{fig:orto_mask_naidis} ja joonisel \ref{fig:orto_nir_mask_naidis} on välja toodud näidised, mis illustreerivad Sentinel-2 saadud pilti ja selle sama piirkonna orotfotosid. NGR värvi tõlgendused on toodud välja varasemas peatükis \ref{chapter:taust} tabelis \ref{tab:NGR_kasutus}. Oranžiga on välja toodud piirkond, mille Sentinel-2 sateliidipildi järgi peaks märkima lageraieks, RGB ortofoto samuti viitab sellele. NGR pildil on ka näha tsüaan tooni, mis viitab sellele, et seal peaks olema mulda, ehk suure tõenäosusega võib seal olla lageraie. Siinjuhul peab meeles pidama ka, et uurimistöös kasutatud ortofotode ja Sentinel-2 piltide vahel on ajaline erinevus ja olgugi, et ortofotol on selgesti oranžis kastis kaks lageraiet, siis Sentinel-2 pildi järgi saab märkida ainult ühe neist lageraieks. Metsa näidis on toodud välja rohelise kastiga, millel on kõigil kolmel pildil suuresti ühtlane kattuvus. Eraldi on piltidel kollase kastiga välja toodud heinamaa piirkond. Heinamaad ja põllumaad on alad, mis satelliidipildilt ja RGB ortofoto võivad põgusal vaatamisel tunduda lageraie alana, kuna seal puid ei kasva, aga kui vaadata lähemalt NGR pilti, siis on näha, et seal on vähem mullale viitavat tsüaan tooni, millest võib järeldada, et seal võiks hoopis põld asuda.
+Joonisel \ref{fig:sent_mask_naidis}, joonisel \ref{fig:orto_mask_naidis} ja joonisel \ref{fig:orto_nir_mask_naidis} on välja toodud näidised, mis illustreerivad Sentinel-2 saadud pilti ja selle sama piirkonna ortofotosid. NGR värvi tõlgendused on toodud välja varasemas peatükis \ref{chapter:taust} tabelis \ref{tab:NGR_kasutus}. Oranžiga on välja toodud piirkond, mille Sentinel-2 sateliidipildi järgi peaks märkima lageraieks, RGB ortofoto samuti viitab sellele. NGR pildil on ka näha tsüaan tooni, mis viitab sellele, et seal peaks olema mulda, ehk suure tõenäosusega võib seal olla lageraie. Siinjuhul peab meeles pidama ka, et uurimistöös kasutatud ortofotode ja Sentinel-2 piltide vahel on ajaline erinevus ja olgugi, et ortofotol on selgesti oranžis kastis kaks lageraiet, siis Sentinel-2 pildi järgi saab märkida ainult ühe neist lageraieks. Metsa näidis on toodud välja rohelise kastiga, millel on kõigil kolmel pildil suuresti ühtlane kattuvus. Eraldi on piltidel kollase kastiga välja toodud heinamaa piirkond. Heinamaad ja põllumaad on alad, mis satelliitpildilt ja RGB ortofoto võivad põgusal vaatamisel tunduda lageraie alana, kuna seal puid ei kasva, aga kui vaadata lähemalt NGR pilti, siis on näha, et seal on vähem mullale viitavat tsüaan tooni, millest võib järeldada, et seal võiks hoopis põld asuda.
 
 \begin{figure}[H]
     \centering
