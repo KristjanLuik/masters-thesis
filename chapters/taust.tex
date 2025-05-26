@@ -8,10 +8,10 @@ põlisrahvad, peavad metsi oma koduks \cite{karsentyUnderlyingCausesRapid2003}.
 Metsad varustavad meid hapnikuga, pakuvad
 varjualust, töökohti, puhast vett ja toitu, olles seega inimkonna ellujäämiseks
 hädavajalikud. Kuna nii paljude inimeste elu sõltub metsadest, on metsade saatus
-otseselt seotud ka meie endi tulevikuga. \cite{WWFImportanceForests} 
+otseselt seotud ka meie endi tulevikuga. \cite{WWFImportanceForests}
 
 \section{Copernicus ja EstHub}
-Eesti metsade kaugseires on oluline roll Copernicuse programmil ja EstHubi keskusel. Copernicus on üks osa Euroopa kosmoseprogrammist (EUS), mis tegeleb planeedi jälgimisega. Copernicus programmi raames, lisaks maa pealse info kogumisele, on loodud mitmeid satelliite, mis koguvad informatsiooni kosmosest. See info on kõigile kättesaadav tasuta. Selle programmiga seotud satelliite kutsutakse \textbf{Sentineliks}. \cite{CopernicusCopernicus}
+Eesti metsade kaugseires on oluline roll Copernicuse programmil ja EstHubi keskusel. Copernicus on üks osa Euroopa kosmoseprogrammist (EUS), mis tegeleb planeedi jälgimisega. Copernicus programmi raames, lisaks maapealse info kogumisele, on loodud mitmeid satelliite, mis koguvad informatsiooni kosmosest. See info on kõigile kättesaadav tasuta. Selle programmiga seotud satelliite kutsutakse \textbf{Sentineliks}. \cite{CopernicusCopernicus}
 
 
 EstHub on Eesti riiklik satelliitandmete keskus, mis kogub ja integreerib
@@ -59,30 +59,31 @@ metsade, veekogude ja muu loodusliku keskkonna eristamist. Iga ribaga seondub
 kindel lainepikkuse vahemik, mida spetsiifiliste filtrite abil eraldatakse. \cite{S2Mission}
 \bigskip
 
-\begin{longtable}{llll}
+\begin{longtable}{p{1cm}p{1.6cm}p{1.6cm}p{9cm}}
     \hline
-    Riba & Resolutsioon & Kasutus                          \\ 
+    Riba & Resolutsioon & Keskmine lainepikkus & Kasutus                          \\ 
     \hline
-    B01  & 60$m \mkern3mu px^{-1}$        & Aerosool                         \\
-    B02  & 10$m \mkern3mu px^{-1}$        & Sinine                           \\
-    B03  & 10$m \mkern3mu px^{-1}$        & Roheline                         \\
-    B04  & 10$m \mkern3mu px^{-1}$        & Punane                           \\
-    B05  & 20$m \mkern3mu px^{-1}$        & Vegetatsiooni klassifitseerimine \\
-    B06  & 20$m \mkern3mu px^{-1}$        & Vegetatsiooni klassifitseerimine \\
-    B07  & 20$m \mkern3mu px^{-1}$        & Vegetatsiooni klassifitseerimine \\
-    B08  & 10$m \mkern3mu px^{-1}$        & Lähiinfrapunariba on hea rannajoonte ja biomassisisalduse kaardistamiseks \\
-    B8A  & 20$m \mkern3mu px^{-1}$        & Kitsam lähedane infrapunane  \\
-    B09  & 60$m \mkern3mu px^{-1}$        & Veeaur tuvastus                       \\
-    B10  & 60$m \mkern3mu px^{-1}$        & Pilvede tuvastus                      \\
-    B11  & 20$m \mkern3mu px^{-1}$        & Lühilaine infrapunane 1      \\
-    B12  & 20$m \mkern3mu px^{-1}$        & Lühilaine infrapunane 2      \\
-         &              &                    &                              \\ \hline
-    \caption{Sentinel-2 MSI spektriribad ja nende kasutusvaldkonnad}
+    B01  & 60 $m/px$      & 443 $nm$ & Ultrasinine (aerosool)           \\
+    B02  & 10 $m/px$      & 490 $nm$ & Sinine                           \\
+    B03  & 10 $m/px$      & 560 $nm$ & Roheline                         \\
+    B04  & 10 $m/px$      & 665 $nm$ & Punane                           \\
+    B05  & 20 $m/px$      & 705 $nm$ & Lähiinfrapuna (vegetatsiooni klassifitseerimine) \\
+    B06  & 20 $m/px$      & 740 $nm$ & Lähiinfrapuna (vegetatsiooni klassifitseerimine) \\
+    B07  & 20 $m/px$      & 783 $nm$ & Lähiinfrapuna (vegetatsiooni klassifitseerimine) \\
+    B08  & 10 $m/px$      & 842 $nm$ & Lähiinfrapunariba (rannajoonte ja biomassisisalduse kaardistamiseks) \\
+    B8A  & 20 $m/px$      & 865 $nm$ & Lähiinfrapuna  \\
+    B09  & 60 $m/px$      & 940 $nm$ & Keskinfrapuna (veeauru tuvastus)                       \\
+    B10  & 60 $m/px$      & 1375 $nm$ & Keskinfrapuna (pilvede tuvastus)                      \\
+    B11  & 20 $m/px$      & 1610 $nm$ & Keskinfrapuna       \\
+    B12  & 20 $m/px$      & 2190 $nm$ & Keskinfrapuna       \\
+%         &              &                    &                              \\
+    \hline
+    \caption{Sentinel-2 MSI spektriribad ja nende kasutusvaldkonnad \cite{S2Mission}.}
     \label{tab:s2bands}
 \end{longtable}
 
 Ribade kombinerimine võimaldab luua erinevaid indekseid, mis aitavad
-eristada erinevaid maapinna omadusi. Näiteks kasutades lähiinfrapunariba saab luua \textbf{NGR}i indeksi, mis põhineb lähi-infrapuna (LIF), rohelise ja punase kanali järjestusel (tähistatakse LRP), kuvab LIF-signaali punases kanalis, rohelise kanal jääb roheliseks ning punane kanal esitatakse sinisena. Selle tulemusel on tervislik taimestik piltidel eredalt punane, kuna rohelised lehed peegeldavad tugevalt lähi-infrapuna spektri osa. Veekogud, mis neelavad nii nähtavat valgust kui ka lähi-infrapuna, ilmuvad tumedana, mullad ja ehituspinnad, mille peegeldus on mõõdukas kõigis kanalites, võtavad omale hallika või kõikuva tooni. Selline komposiit võimaldab metsanduses efektiivselt hinnata taimede seisundit ja kaardistada metsapiire.
+eristada erinevaid maapinna omadusi. Näiteks kasutades lähiinfrapunariba B08 saab luua \textbf{NGR}i indeksi, mis põhineb lähi-infrapuna (LIF), rohelise ja punase kanali järjestusel (tähistatakse LRP), kuvab LIF-signaali punases kanalis, rohelise kanal jääb roheliseks ning punane kanal esitatakse sinisena. Selle tulemusel on tervislik taimestik piltidel eredalt punane, kuna rohelised lehed peegeldavad tugevalt lähi-infrapuna spektri osa. Veekogud, mis neelavad nii nähtavat valgust kui ka lähi-infrapuna, ilmuvad tumedana, mullad ja ehituspinnad, mille peegeldus on mõõdukas kõigis kanalites, võtavad omale hallika või kõikuva tooni. Selline komposiit võimaldab metsanduses efektiivselt hinnata taimede seisundit ja kaardistada metsapiire.
 
 \begin{longtable}{lp{5cm}l}
     \hline
