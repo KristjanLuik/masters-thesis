@@ -61,17 +61,22 @@ analüüsil. Käesolevas töös autor ise PostGIS-i ei kasutanud, kuid Keskkonna
 
 \textbf{Riistvara}\nopagebreak[4]
 
-Uurimistöö läbiviimisel kasutati ülikooli AI-labori ressursse. Labor koosneb ühest pea-sõlmest, mis haldab teisi masinaid, ning alamsõlmedest, mis teostavad töid. Autor kasutas ai-lab-07 sõlme CPU-intensiivsete ülesannete, nagu andmekogumi koostamine, piltide töötlemine ja kompressioon, ning mitte sügav närvivõrkude mudelite treenimiseks nagu ResNet34, ResNet50 ning MobileNetV2. Samas süvaõppe eksperimentide teostamiseks kasutati ai-lab-04 sõlme, mille GPU ja mälumaht võimaldasid keerukamate mudelite treenimist. Selline ressursside jaotus aitas töövoogu optimeerida ja tagada tööde sujuva teostuse vastavalt konkreetsetele arvutusvajadustele.
+Uurimistöö läbiviimisel kasutati ülikooli AI-labori ressursse. Labor koosneb ühest pea-sõlmest, mis haldab teisi masinaid, ning alamsõlmedest, mis teostavad töid. Autor kasutas ai-lab-07 sõlme CPU-intensiivsete ülesannete, nagu andmekogumi koostamine, piltide töötlemine ja kompressioon, ning konvolutsiooniliste närvivõrkude mudelite treenimiseks nagu ResNet34, ResNet50 ning MobileNetV2. Samas süvaõppe eksperimentide teostamiseks kasutati ai-lab-04 ja ai-lab-03 sõlmi, mille GPU ja mälumaht võimaldasid keerukamate mudelite treenimist. Selline ressursside jaotus aitas töövoogu optimeerida ja tagada tööde sujuva teostuse vastavalt konkreetsetele arvutusvajadustele. Ülevaate kasutatud ressurssidest leiab Tabelist \ref{tab:hardwareused}.
+
+\begin{table}
+\caption{Kasutatud riistvara}
+\label{tab:hardwareused}	
 \begin{longtable}{lllll}
     \hline
     Sõlm & Protsessor & Mälu & GPU & GPU mälu                         \\ 
     \hline
-    ai-lab-07 & 3960X 24-cores/48-threads & 128 GB & NVidia 2080Ti & 11 GB    \\
-    ai-lab-04 & 3970X 32-cores/64-threads & 128 GB & NVidia 3090 & 24 GB      \\
-    &              &                    &                              \\ \hline
-    \caption{Kasutatud riistvara}
-    \label{tab:hardwareused}
+    ai-lab-03 & 7975WX 32-cores/64-threads & 384 GB & NVidia RTX6000Ada & 48 GB    \\
+    ai-lab-04 & 3970X 32-cores/64-threads & 128 GB & NVidia 4090 & 24 GB      \\
+    ai-lab-07 & 3060X 24-cores/48-threads & 128 GB & AMD RX6900XT & 16 GB    \\
+%    &              &                    &                              \\
+\hline
 \end{longtable}
+\end{table}
 
 \input{chapters/andmestiku_loomine.tex}
 
