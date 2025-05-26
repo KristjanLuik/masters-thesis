@@ -1,5 +1,5 @@
 \section{Andmestiku loomine}
-Selles peatükis käsitletakse andmestiku loomise protsessi, sealhulgas andmete kogumist, töötlemist ja maskimist. Andmestiku loomine on oluline samm igasuguste andmete analüüsimisel ja seda ka masinõppe projektide puhul. Andmete kvaliteet ja sobivus mõjutavad otseselt mudeli täpsust ja usaldusväärsust. Nagu muudes valdkondades kehtib ka informaatikas Pareto printsiip, mille kohaselt 80\% probleemidest tuleneb 20\% põhjustest. Seega on andmestiku loomine ja töötlemine äärmiselt oluline etapp, mis võib määrata kogu projekti edasise käigu.
+Käesolevas osas käsitletakse andmestiku loomise protsessi, sealhulgas andmete kogumist, töötlemist ja maskimist. Andmestiku loomine on oluline samm igasuguste andmete analüüsimisel ja seda ka masinõppe projektide puhul. Andmete kvaliteet ja sobivus mõjutavad otseselt mudeli täpsust ja usaldusväärsust. Nagu muudes valdkondades kehtib ka informaatikas Pareto printsiip, mille kohaselt 80\% probleemidest tuleneb 20\% põhjustest. Seega on andmestiku loomine ja töötlemine äärmiselt oluline etapp, mis võib määrata kogu projekti edasise käigu.
 
 \subsection{Raie piirkonna andmete kogumine}
 Metsateatis on dokument, mille kaudu metsaomanik esitab Keskkonnaametile
@@ -18,7 +18,7 @@ esitatakse hektarites vähemalt kümnendkohani ning täpsusega 10 meetrit --- se
 loob aluse usaldusväärsele pindalaarvestusele ja edaspidistele
 takseerimistoimingutele. \cite{MetsaKorraldamiseJuhend}
 
-Koostöös Keskkonnaametiga (Envir) saadi andmed metsateatistest, mis sisaldavad teavet nii metsateatise esitamise kuupäeva, metsateatise menetlemise kuupäeva, metsateatise kehtivuse alguskuupäeva kui ka metsateatise kehtivuse lõppkuupäeva kohta. Kuna riigimetsade teatised on täpsemas seisukorras, siis võeti need raieteatised selle uurimustöö aluseks. Seoses sellega et ühe lõigu peal võib olla väga väike kogus metsa, sai teatiste pärimine ümber ehitatud sedasi, et ühe metsa raie ümber kogutakse peale raie toimumist kokku ka kõik teiste raiete raadiuses asuvad piirkonnad, millel on teada, kas on mets või raieala. Piirkonniti pärimine sai teostatud kasutades PostGISi liidest Postgresi andmebaasiga. Iga raie sisaldab ka endas geomeetria veergu, mis esitab polügooni kujul selle asukohta. 
+Koostöös Keskkonnaagentuuriga saadi andmed metsateatistest, mis sisaldavad teavet nii metsateatise esitamise kuupäeva, metsateatise menetlemise kuupäeva, metsateatise kehtivuse alguskuupäeva kui ka metsateatise kehtivuse lõppkuupäeva kohta. Kuna riigimetsade teatised on täpsemas seisukorras, siis võeti need raieteatised selle uurimustöö aluseks. Seoses sellega et ühe lõigu peal võib olla väga väike kogus metsa, sai teatiste pärimine ümber ehitatud sedasi, et ühe metsa raie ümber kogutakse peale raie toimumist kokku ka kõik teiste raiete raadiuses asuvad piirkonnad, millel on teada, kas on mets või raieala. Piirkonniti pärimine sai teostatud kasutades PostGISi liidest Postgresi andmebaasiga. Iga raie sisaldab ka endas geomeetria veergu, mis esitab polügooni kujul selle asukohta. 
 
 Polügoon ehk hulknurk on geomeetriline kujund, mis määratleb kindla ala, ühendades üksteisega
 punktid, et moodustada suletud piirjoon. Andmetöötluse ja ruumiandmete analüüsi
@@ -27,25 +27,32 @@ kontekstis kasutatakse polügoone, et täpselt määratleda geograafilisi alasid
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.7\textwidth} % Set width for side-by-side arrangement
-        \centering
-        \includegraphics[width=0.7\textwidth]{figures/andmestik/er_id_is_3308099.png}
-        \caption{}
-        \label{fig:umbrusexample}
-    \end{subfigure}
-    % Second subfigure
-    \begin{subfigure}{0.7\textwidth} 
-        \centering
-        \includegraphics[width=0.7\textwidth]{figures/andmestik/lr_3308099_TCI.png}
-        \caption{} % Leave caption empty to automatically label this subfigure as (b)
-        \label{fig:satellite_example}
-    \end{subfigure}
+    \hspace{-0.5cm}\subfloat[]{{\includegraphics[width=0.5\textwidth]{figures/andmestik/er_id_is_3308099.png}
+    	}}
+    %\begin{subfigure}[b]{0.5\textwidth} % Set width for side-by-side arrangement
+    %    \centering
+    %    \includegraphics[width=0.5\textwidth]{figures/andmestik/er_id_is_3308099.png}
+    %    \caption{}
+    %    \label{fig:umbrusexample}
+    %\end{subfigure}
+    %% Second subfigure
+    \subfloat[]{{\includegraphics[width=0.5\textwidth]{figures/andmestik/lr_3308099_TCI.png}
+}}
 
+    %\begin{subfigure}{0.5\textwidth} 
+    %   \centering
+    %    \includegraphics[width=0.5\textwidth]{figures/andmestik/lr_3308099_TCI.png}
+    %    \caption{} % Leave caption empty to automatically label this subfigure as (b)
+    %    \label{fig:satellite_example}
+    %\end{subfigure}
+
+    \caption{Näidis ühe lageraie päringust saadud ümbrusest (a) ja satelliitpildist (b).}
     \label{fig:sidebyside_teatis_sat_img}
-    \caption{Näidis ühe lageraie päringust saadud ümbrus ja satelliitpilt}
 \end{figure}
 
-Magistritöö peamiseks uurimisküsimuseks on, kas ja kuidas on võimalik kasutada väheste näidete (\textit{Few-Shot}) põhist alusmudelit. Väikese valimi puhul on aga vaja eriti täpseid andmeid millelt õppida. Nagu eelnevalt mainitud siis metsaregistrist saadud andmed ei ole piisavalt täpsed, et neid otse kasutada alusmudeli treenimisel metsaraie tuvastamiseks. Seetõttu lisandusid uurimistöösse andmete täiendava töötlemise ja maskimise etapid, kus andmed käiakse käsitsi läbi, kasutades registri andmeid maski põhjana. Ajalise piirangu tõttu pidi tegema alamvalimi. Et saada Eesti metsade kohta üldisemaid näiteid kasutati selleks KMeans klasterdamise meetodit, et jagada metsad omakorda kahte erinevasse klassi okas- ja lehtpuud. Eesmärgiks oli koguda kokku 100 raiet ja nende ümbrust, et luua piisavalt andmeid, mille pealt mudelit treenida. Kui peaks juhtuma et mõni pilt pole kõlbulik, siis valitakse samas klustrist uus lageraie piirkond.
+Magistritöö peamiseks uurimisküsimuseks on, kas ja kuidas on võimalik kasutada väheste näidete (\textit{Few-Shot}) põhist alusmudelit. Väikese valimi puhul on aga vaja eriti täpseid andmeid millelt õppida. Nagu eelnevalt mainitud siis metsaregistrist saadud andmed ei ole piisavalt täpsed, et neid otse kasutada alusmudeli treenimisel metsaraie tuvastamiseks, mis on illustreeritud Joonisel \ref{fig:sidebyside_teatis_sat_img}. Esiteks on küsimus, kui kaua pärast raieteatise kehtima hakkamist metsa raiuti, kui üldse raiuti, ja teiseks esineb raieid, mis ei püsi rangelt metsajaotiste piirides. Lisaks paistab raiutud mets raiutud metsana erineva perioodi vältelt sõltuvalt raie aastaajast -- suvisel ajal muutub raiutud ala kiiremini roheliseks.
+
+Seetõttu lisandusid uurimistöösse andmete täiendava töötlemise ja maskimise etapid, kus andmed käiakse käsitsi läbi, kasutades registri andmeid maski põhjana. Ajalise piirangu tõttu pidi tegema alamvalimi. Et saada Eesti metsade kohta üldisemaid näiteid kasutati selleks KMeans klasterdamise meetodit, et jagada metsad omakorda kahte erinevasse klassi okas- ja lehtpuud. Eesmärgiks oli koguda kokku 100 raiet ja nende ümbrust, et luua piisavalt andmeid, mille pealt mudelit treenida. Kui peaks juhtuma et mõni pilt pole kõlbulik, siis valitakse samast alamvalimist uus lageraie piirkond. Valitud alad on toodud Joonisel \ref{fig:kmeans}. 
 
 \begin{figure}[H]
     \centering
@@ -55,7 +62,7 @@ Magistritöö peamiseks uurimisküsimuseks on, kas ja kuidas on võimalik kasuta
 \end{figure}
 
 
-Peale selle etapi lõppu, kus on loodud 100 raie ümbrust polügoonidena. Edasi kirjeldatakse lahti sammud, välja toodud joonisel \ref{fig:terveflow}, et saada nendega seonduvad satelliitpildid.
+Peale selle etapi lõppu, kus on loodud 100 raie ümbrust polügoonidena. Edasi kirjeldatakse lahti sammud, välja toodud Joonisel \ref{fig:terveflow}, et saada nendega seonduvad satelliitpildid.
 
 Töös kasutatud andmestik koosneb 15 lageraie piirkonnast. Alljärgnevalt on tabel mis toob välja lageraie ID ja jäädvustus kuupäeva.
 \bigskip
@@ -178,7 +185,7 @@ Eesmärk oli luua dokument, mis aitaks kõigil kasutajatel luua vektormaske kasu
 Teiseks on dokumendis toodud välja juhtnöörid ja soovitused, mida peaks järgima
 maskide loomisel. Järgnevalt on välja toodud mõned näidised, mis illustreerivad ortofotode ja Sentinel-2 piltide erinevusi, seega on tähtis, et orotfotosid kautatakse juhtnööridena aga mitte põhitõena. Masinõppes kasutatavate andmete kvaliteet antud uurimistöös mängib suurt rolli, seega kui maskide loomise käigus tekkis kahtlusi klassi tuvastamises, siis jäeti need alad alati välja.
 
-Joonisel \ref{fig:sent_mask_naidis}, joonisel \ref{fig:orto_mask_naidis} ja joonisel \ref{fig:orto_nir_mask_naidis} on välja toodud näidised, mis illustreerivad Sentinel-2 saadud pilti ja selle sama piirkonna ortofotosid. NGR värvi tõlgendused on toodud välja varasemas peatükis \ref{chapter:taust} tabelis \ref{tab:NGR_kasutus}. Oranžiga on välja toodud piirkond, mille Sentinel-2 sateliidipildi järgi peaks märkima lageraieks, RGB ortofoto samuti viitab sellele. NGR pildil on ka näha tsüaan tooni, mis viitab sellele, et seal peaks olema mulda, ehk suure tõenäosusega võib seal olla lageraie. Siinjuhul peab meeles pidama ka, et uurimistöös kasutatud ortofotode ja Sentinel-2 piltide vahel on ajaline erinevus ja olgugi, et ortofotol on selgesti oranžis kastis kaks lageraiet, siis Sentinel-2 pildi järgi saab märkida ainult ühe neist lageraieks. Metsa näidis on toodud välja rohelise kastiga, millel on kõigil kolmel pildil suuresti ühtlane kattuvus. Eraldi on piltidel kollase kastiga välja toodud heinamaa piirkond. Heinamaad ja põllumaad on alad, mis satelliitpildilt ja RGB ortofoto võivad põgusal vaatamisel tunduda lageraie alana, kuna seal puid ei kasva, aga kui vaadata lähemalt NGR pilti, siis on näha, et seal on vähem mullale viitavat tsüaan tooni, millest võib järeldada, et seal võiks hoopis põld asuda.
+Joonisel \ref{fig:sent_mask_naidis}, Joonisel \ref{fig:orto_mask_naidis} ja Joonisel \ref{fig:orto_nir_mask_naidis} on välja toodud näidised, mis illustreerivad Sentinel-2 saadud pilti ja selle sama piirkonna ortofotosid. NGR värvi tõlgendused on toodud välja varasemas Peatükis \ref{chapter:taust} Tabelis \ref{tab:NGR_kasutus}. Oranžiga on välja toodud piirkond, mille Sentinel-2 sateliidipildi järgi peaks märkima lageraieks, RGB ortofoto samuti viitab sellele. NGR pildil on ka näha tsüaan tooni, mis viitab sellele, et seal peaks olema mulda, ehk suure tõenäosusega võib seal olla lageraie. Siinjuhul peab meeles pidama ka, et uurimistöös kasutatud ortofotode ja Sentinel-2 piltide vahel on ajaline erinevus ja olgugi, et ortofotol on selgesti oranžis kastis kaks lageraiet, siis Sentinel-2 pildi järgi saab märkida ainult ühe neist lageraieks. Metsa näidis on toodud välja rohelise kastiga, millel on kõigil kolmel pildil suuresti ühtlane kattuvus. Eraldi on piltidel kollase kastiga välja toodud heinamaa piirkond. Heinamaad ja põllumaad on alad, mis satelliitpildilt ja RGB ortofoto võivad põgusal vaatamisel tunduda lageraie alana, kuna seal puid ei kasva, aga kui vaadata lähemalt NGR pilti, siis on näha, et seal on vähem mullale viitavat tsüaan tooni, millest võib järeldada, et seal võiks hoopis põld asuda.
 
 \begin{figure}[H]
     \centering
