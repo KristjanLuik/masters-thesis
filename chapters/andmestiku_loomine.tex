@@ -24,11 +24,25 @@ Polügoon ehk hulknurk on geomeetriline kujund, mis määratleb kindla ala, ühe
 punktid, et moodustada suletud piirjoon. Andmetöötluse ja ruumiandmete analüüsi
 kontekstis kasutatakse polügoone, et täpselt määratleda geograafilisi alasid. \cite{WhatLocationPolygon}
 
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.5\textwidth]{figures/andmestik/er_id_is10124223.png}
+    \begin{subfigure}[b]{0.7\textwidth} % Set width for side-by-side arrangement
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/andmestik/er_id_is_3308099.png}
+        \caption{}
+        \label{fig:umbrusexample}
+    \end{subfigure}
+    % Second subfigure
+    \begin{subfigure}{0.7\textwidth} 
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/andmestik/lr_3308099_TCI.png}
+        \caption{} % Leave caption empty to automatically label this subfigure as (b)
+        \label{fig:satellite_example}
+    \end{subfigure}
+
+    \label{fig:sidebyside_teatis_sat_img}
     \caption{Näidis ühe lageraie päringust saadud ümbrus}
-    \label{fig:umbrusexample}
 \end{figure}
 
 Magistritöö peamiseks uurimisküsimuseks on, kas ja kuidas on võimalik kasutada väheste näidete (\textit{Few-Shot}) põhist alusmudelit. Väikese valimi puhul on aga vaja eriti täpseid andmeid millelt õppida. Nagu eelnevalt mainitud siis metsaregistrist saadud andmed ei ole piisavalt täpsed, et neid otse kasutada alusmudeli treenimisel metsaraie tuvastamiseks. Seetõttu lisandusid uurimistöösse andmete täiendava töötlemise ja maskimise etapid, kus andmed käiakse käsitsi läbi, kasutades registri andmeid maski põhjana. Ajalise piirangu tõttu pidi tegema alamvalimi. Et saada Eesti metsade kohta üldisemaid näiteid kasutati selleks KMeans klasterdamise meetodit, et jagada metsad omakorda kahte erinevasse klassi okas- ja lehtpuud. Eesmärgiks oli koguda kokku 100 raiet ja nende ümbrust, et luua piisavalt andmeid, mille pealt mudelit treenida. Kui peaks juhtuma et mõni pilt pole kõlbulik, siis valitakse samas klustrist uus lageraie piirkond.
