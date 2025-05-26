@@ -1,0 +1,51 @@
+Ehkki käesolev töö demonstreeris isejuhitud Vision Transformer'i põhisele DINO
+v2 mudelile ja SAM v2 väheste õppeandmete lähenemisele tugineva segmentatsiooni
+edukust Sentinel-2 piltidel, on olemas mitmeid võimalusi täiendusteks ja
+metoodilisteks parendusteks:
+
+\textbf{Super-resolutsiooni rakendamine} 
+Kuna Sentinel-2 ruumiline lahutusvõime on
+piiratud (10 m/piks), võib väikeste lageraie fragmentide täpsemaks tuvastamiseks
+kasutada süvaõppel põhinevaid super-resolutsiooni mudeleid (nt ESRGAN, RCAN).
+Eeltehtud super-resolutsiooni mudelid suudaksid tõsta sisendi detailsust,
+võimaldades segmenteerimisel paremini eristada kitsaid raiemustreid ja segatud
+taimestiku.
+
+\textbf{Rohkemate spektraalribade kaasamine} Uuringus keskendusime 10 m ja 20 m
+riba­komplektile (B02--B08), kuid Sentinel-2 andmestikul on ka 60 m
+lahutusvõimega B01, B09, B10 ribad. Nende ja teiste indeksite (nt NDMI, EVI,
+SAVI) kombineerimine võib lisada eristavust pilvede, märgade alade ja erinevate
+puuliikide vahel. Lisaks tasub uurida Sentinel-1 S-banda radariandmete liitmist,
+et parandada pilvekatte all segmentatsiooni ja tuvastada aluspinnamuutusi.
+
+\textbf{Kõrgema resolutsiooniga satelliidiandmete integreerimine} Kommertssatelliidid
+nagu WorldView-3 (0,3 m piks), Pleiades (0,5 m) ja PlanetScope (3 m) pakuvad
+oluliselt paremat ruumilist lahutust. Nende kõrglahutusega andmete
+mitmespektriline analüüs (nt PAN-sharpening) võib toetada treeningandmete
+loomist ja mudeli peenhäälestust, võimaldades tuvastada ja valideerida
+väiksemaid raietegevuse detaile.
+
+\textbf{Ajarealist analüüsi süvendamine} Käesolev töö käsitles iga lageraie juhtumit
+eraldi hetke põhiselt. Järgmistes etappides võiks integreerida
+ajaseeria-segmendatsiooni (nt ConvLSTM, Temporal CNN), et modelleerida metsa
+arengut ja raiemustreid ajas. See võimaldaks tuvastada hooajalisi ja
+aastate-üleseid trende ning eristada ajutisi muutusi (nt varisemine, põua- või
+tulekahju-kahjustused) tegelikest lageraietest.
+
+\textbf{Täiustatud pilve- ja varjumaskimine} Pilve ning varjude eemaldamine piiras osa
+piltide kasutamist. Tulevases töös võiks katsetada nn ``cloud shadow''
+tuvastamise meetodeid (nt Fmask, Sen2Cor täiendused) või sügavõppel põhinevaid
+pilvemaskimudeleid, et taastada katkenud ajaread ja saavutada pidevam andmevoog.
+
+\textbf{Mudeli peenhäälestuse automatiseerimine} Hüperparameetrite käsitsi otsing on
+ajamahukas. Võiks rakendada Bayesia optimeerimist või evolutsioonialgoritme (nt
+Optuna, Hyperopt) hüpermäärade leidmiseks, samuti kasutada automaatset Data
+Augmentation strateegiate valikut (nt AutoAugment), et tugevdada mudeli
+üldistusvõimet väheste andmetega.
+
+\textbf{Üldistusvõime ja siirdõpe uutes piirkondades} Järgnevalt on soovitatav hinnata
+mudeli ülekantavust erinevates geograafilistes ja metsastikutüüpides (nt
+okaspuumetsad Põhja-Soomes, troopilised metsad Indoneesias). Siirdõpe (transfer
+learning) sobiva allmudeliga ja peenhäälestus väheste lokaalsete näidete põhjal
+aitaks välja selgitada, millises mahus mudel vajab uut treeningandmestikku
+globaalseks rakenduseks.

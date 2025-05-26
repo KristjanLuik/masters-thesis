@@ -1,1 +1,30 @@
-kokkuvõte
+Käesolevas magistritöös uuriti isejuhitud Vision Transformer'ite ja väheste
+õppeandmete lähenemiste sobivust lageraie tuvastamiseks Sentinel-2
+multispektraalsetelt satelliidipiltidelt. Esiteks loodi ainulaadne andmestik,
+mis koosneb 15 lageraie polügoonist ja nende ümbrusest, kombineerides riiklikud
+metsateatised täiendava eksperthinnangu ning K-keskmise klasterdamise alusel
+diferentseeritud okas- ja lehtpuu alad. Järgnenud eeltöötlemise sammudes laaditi
+alla sobivad Sentinel-2 Level-2A tooted, teostati atmosfääriline korrektsioon
+ning genereeriti georeferentseeritud GeoTIFF rasterfragmendid.
+
+Seejärel peenhäälestati ja võrreldi kolme tipptasemel segmentatsiooniraamistiku
+(DINO v2 + SAM v2, U-Net, Segmentation Model Zoo modulaarpead: DeepLabv3, FPN)
+tulemuslikkust, mõõdetuna peamiselt IoU ja Dice koefitsiendiga. Tulemused
+näitasid, et DINO v2 baasil ühendatud väheste näidete treeningu skeem
+pakkus kõige paremat segmenteerimistäpsust. U-Net jäi veidi alla, kuid
+kergesti peenhäälestatavate hüperparameetrite tõttu osutus produktiivseks
+lähtepunktiks.
+
+Uurimistöö tõestas, et isejuhitud peaahelad suudavad väheste andmetega anda
+küll kesiseid tulemeid satelliidipildisegmenteerimise valdkonnas,
+vähendades sõltuvust suurest märgendatud andmestikust ja eksperthõlmapanust.
+Samas toodi välja mitmed potentsiaalsed suunad edasiseks arenduseks, sh
+super-resolutsiooni rakendamine, täiendavate spektraalribade ja
+kommerts-satelliitide andmete kaasamine, ajarealise analüüsi süvendamine ning
+pilve- ja varjumaskimise strateegiate täiustamine.
+
+Kokkuvõttes annab töö aluse automaatsete algoritmide kasutusele metsaraiete
+täpsemaks jälgimiseks ja metsade jätkusuutlikuks haldamiseks. Edasised uurimused
+võiksid laiendada metoodikat globaalsesse konteksti ja integreerida
+mitmeallikalisi andmeid, et saavutada veelgi detailsem ja vastupidavam
+metsanduse seire- ning valduse haldamise lahendus.
