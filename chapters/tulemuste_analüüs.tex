@@ -22,7 +22,7 @@ Osaliselt on tipptulemused visualiseeritud ka lisatud joonisel \ref{fig:segmenta
 
 \textbf{Kõrgete skooride põhjused}
 Kõrgeid tulemusi väikesel andmestikul võib seletada mitme teguriga.
-Siirdeõpe (\textit{Transfer Learning}): ImageNet andmestikul eelkoolitatud enkooderite
+Siirdõpe (\textit{Transfer Learning}): ImageNet andmestikul eelkoolitatud enkooderite
 kasutamine on tõenäoliselt peamine edu võti. Eelnevalt treenitud mudelid omavad
 juba võimekust tuvastada üldiseid visuaalseid mustreid (nt servad, tekstuurid),
 mida saab efektiivselt kohandada spetsiifilisele metsanduse segmenteerimise
@@ -41,7 +41,7 @@ treeningandmeid lihtsalt pähe.
 \end{figure}
 
 Samas individuaalsed klassi tulemused (nt metsastumine vs lageraie) Dice skoorid näitasid suuresti, et mudel ei suuda
-täpselt eristada metsastumist ja lageraielõike. Kõrge skoor tuleneb suuresti tagatausta suurest osakaalust pildil. Joonisel \ref{fig:sidebyside_forest_bg} on näha et ülejäänud tausta keskmine Dice skoor on 0.98, mis on väga kõrge. Aga klassipõhised tulemused näitavad, et metsastumise ja lageraielõike eristamine on keeruline. Mudelite katsed ka näitavada, et ka parimate mudelite puhul ei saa nad metsastumist ja lageraielõike eristada.
+täpselt eristada metsaga kaetud alasid ja lageraielõike. Kõrge skoor tuleneb suuresti tagatausta suurest osakaalust pildil. Joonisel \ref{fig:sidebyside_forest_bg} on näha et ülejäänud tausta keskmine Dice skoor on 0.98, mis on väga kõrge. Aga klassipõhised tulemused näitavad, et metsade ja lageraie alade eristamine on keeruline. Mudelite katsed ka näitavada, et ka parimate mudelite puhul ei suuda nad metsa ja lageraiet eristada.
 
 \begin{figure}[H] % Placement specifier: h-here, t-top, b-bottom
     \centering
@@ -93,7 +93,7 @@ hüperparameetreid, nagu õppimismäär (nt 1e-5, 5e-5, 1e-4), partii suurus (1,
 \end{longtable}
 \bigskip
 
-Eksperimentide tulemused näitavad, et DINOv2-põhiste mudelite jõudlus satelliidipiltide segmenteerimisel sõltub oluliselt tuumvõrgu suurusest, segmenteerimispea keerukusest ja treeningustrateegiast. Suuremad tuumvõrgud (nt ViTG14) ja mitme skaala tunnuseid töötlevad pead (nt FPNHead) andsid parimaid tulemusi, saavutades keskmise IoU kuni 0,28 ja täpsuse kuni 0,38. Peenhäälestamine parandas jõudlust võrreldes külmutatud mudelitega, kuid pikaajalistes treeningutes (500–800 epohhi) ilmnes ebastabiilsus, mis viitab ületreenimisele või ebapiisavale regulatsioonile.
+Eksperimentide tulemused näitavad, et DINOv2-põhiste mudelite jõudlus satelliidipiltide segmenteerimisel sõltub oluliselt närvivõrgu selgroo suurusest, segmenteerimispea keerukusest ja treeningustrateegiast. Suuremad närvivõrkude selgrood (nt ViTG14) ja mitme skaala tunnuseid töötlevad pead (nt FPNHead) andsid parimaid tulemusi, saavutades keskmise IoU kuni 0,28 ja täpsuse kuni 0,38. Peenhäälestamine parandas jõudlust võrreldes külmutatud mudelitega, kuid pikaajalistes treeningutes (500–800 epohhi) ilmnes ebastabiilsus, mis viitab ületreenimisele või ebapiisavale regulatsioonile.
 
 Soovitused edasiseks uurimistööks hõlmavad varajase peatamise ja õppimismäära ajakava rakendamist stabiilsuse suurendamiseks, samuti täiendavate arhitektuuride (nt hübriidmudelite) testimist jõudluse lae ületamiseks. Praegused tulemused pakuvad väärtuslikku alust metsanduslike satelliidipiltide segmenteerimise optimeerimiseks.
 
@@ -155,7 +155,7 @@ Metsateatistel põhinev segmentatsiooni tulemus:
 
 \textbf{Analüüsi kokkuvõte}
 
-Kokkuvõttes näitavad eksperimendid, et DINOv2 ja SAMv2 raamistike kasutamine satelliidipiltide segmenteerimisel metsanduse kontekstis võib anda häid tulemusi, kuid nõuab hoolikat hüperparameetrite valikut ja treeningstrateegiate rakendamist. Parimad tulemused saavutati suuremate tuumvõrkude ja keerukamate segmenteerimispeadega, mis suudavad efektiivselt töödelda erinevaid visuaalseid mustreid. Tulevikus võiks uurida ka hübriidmudelite kasutamist, mis kombineerivad erinevate arhitektuuride eeliseid.
+Kokkuvõttes näitavad eksperimendid, et DINOv2 ja SAMv2 raamistike kasutamine satelliidipiltide segmenteerimisel metsanduse kontekstis võib anda häid tulemusi, kuid nõuab hoolikat hüperparameetrite valikut ja treeningstrateegiate rakendamist. Parimad tulemused saavutati suuremate närvivõrkude selgroogude ja keerukamate segmenteerimispeadega, mis suudavad efektiivselt töödelda erinevaid visuaalseid mustreid. Tulevikus võiks uurida ka hübriidmudelite kasutamist, mis kombineerivad erinevate arhitektuuride eeliseid.
 
 \section{Edasiarendus ja täiustamine}
 \input{chapters/edasiarendus_ja_täiustamine.tex}
