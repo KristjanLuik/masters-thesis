@@ -76,6 +76,7 @@ IoU (Intersection over Union) ja keskmise täpsuse (Mean Accuracy) alusel,
 jälgides neid mõõdikuid kuni 800 epohhi vältel. Treeningutingimustes varieeriti
 hüperparameetreid, nagu õppimismäär (nt 1e-5, 5e-5, 1e-4), partii suurus (1, 2,
 4) ning rakendati nii külmutamist (Freeze) kui ka peenhäälestamist (FineTune).
+
 \bigskip
 \begin{longtable}{llll}
     \textbf{Konfiguratsioon} & \textbf{Mean Dice} & \textbf{Mean IoU} & \textbf{Mean Täpsus} \\
@@ -96,6 +97,65 @@ Eksperimentide tulemused näitavad, et DINOv2-põhiste mudelite jõudlus satelli
 
 Soovitused edasiseks uurimistööks hõlmavad varajase peatamise ja õppimismäära ajakava rakendamist stabiilsuse suurendamiseks, samuti täiendavate arhitektuuride (nt hübriidmudelite) testimist jõudluse lae ületamiseks. Praegused tulemused pakuvad väärtuslikku alust metsanduslike satelliidipiltide segmenteerimise optimeerimiseks.
 
+\textbf{SAMv2 eksperimendid}
+
+Sarnaselt DINOv2 katsetele viidi läbi ka eksperimendid Segment Anything Model (SAMv2) raamistiku kasutamisel. SAMv2 on tuntud oma võime poolest tegeleda erinevate segmentatsiooniülesannetega, sealhulgas satelliidipiltide analüüsiga. Katsetes uuriti erinevaid hüperparameetreid, sealhulgas õppimismäära, partii suurust ja treeninguetappe, et leida parim konfiguratsioon metsanduse kontekstis.
+
+Tabelis on seitse eksperimenti, mis erinevad mudeli variandi, epohhide arvu,
+õppimiskiiruse ja segmenteerimispea tüübi poolest. Kõik eksperimendid kasutavad
+501 epohhi. Parima konfiguratsiooni leidmiseks võrdleme IoU ja Dice väärtusi, kuna need on peamised näitajad mudeli jõudluse hindamisel. Tabelist selgub, et kõrgeimad tulemused on järgmised:
+
+\begin{itemize}
+    \item Kõrgeim IoU:  0.350205 (konfiguratsioon: large, õppimiskiirus $1 \times 10^{-5}$, Multi-Layer pea).
+    \item Kõrgeim Dice:  0.262514 (sama konfiguratsioon: large, õppimiskiirus $1 \times 10^{-5}$, Multi-Layer pea).
+\end{itemize}
+
+\begin{longtable}{ccccccc}
+    \hline
+    Variant & Epochs & Learning Rate & Head Type & IoU & Dice \\
+    \hline
+        tiny &  501 & $1 \times 10^{-4}$ & Simple & 0.229138 & 0.150820\\
+        tiny &  501 & $1 \times 10^{-4}$ & Multi-Layer & 0.256366 & 0.178527 \\
+        large &  501 & $1 \times 10^{-4}$ & ASPP & 0.327914 & 0.246620  \\
+        large &  501 & $1 \times 10^{-4}$ & U-Net Style & 0.289425 & 0.205382  \\
+        large &  501 & $1 \times 10^{-5}$ & Multi-Layer & 0.350205 & 0.262514 \\
+        base\_plus & 501 & $1 \times 10^{-4}$ & Multi-Layer & 0.279433 & 0.195139  \\
+        large &  501 & $1 \times 10^{-4}$ & Simple & 0.242327 & 0.163633 \\
+    \hline
+\caption{Samv2 eksperimendi tulemused}
+\label{tab:samv2_results}
+\end{longtable}
+
+Järgnevas joonises on välja toodud SAMv2 eksperimendi tulemused eksperimendi lõikes ja jaotadud klassideks.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/tulemused/Sam_experimentide_tulemused_klassid.png}
+    \caption{SAMv2 eksperimendi tulemused klasside lõikes. }
+    \label{fig:sam_result}
+\end{figure}
+
+Kasutades eelmises osas treenitud SAMv2 mudelit, genereerisime segmentatsioonikaardid:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/tulemused/prediction_3403037_TCI.png}
+    \caption{SAMv2 pareima mudeli segmentatsioonitulemused}
+    \label{fig:sam_best_result}
+\end{figure}
+
+Metsateatistel põhinev segmentatsiooni tulemus:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/tulemused/ground_truth_mask_3403037.png}
+    \caption{Metsateatistel põhinev segmentatsiooni tulemus}
+    \label{fig:actual_mask}
+\end{figure}
+
+
+
+\textbf{Analüüsi kokkuvõte}
+
+Kokkuvõttes näitavad eksperimendid, et DINOv2 ja SAMv2 raamistike kasutamine satelliidipiltide segmenteerimisel metsanduse kontekstis võib anda häid tulemusi, kuid nõuab hoolikat hüperparameetrite valikut ja treeningstrateegiate rakendamist. Parimad tulemused saavutati suuremate tuumvõrkude ja keerukamate segmenteerimispeadega, mis suudavad efektiivselt töödelda erinevaid visuaalseid mustreid. Tulevikus võiks uurida ka hübriidmudelite kasutamist, mis kombineerivad erinevate arhitektuuride eeliseid.
 
 \section{Edasiarendus ja täiustamine}
 \input{chapters/edasiarendus_ja_täiustamine.tex}
