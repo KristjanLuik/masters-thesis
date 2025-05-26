@@ -51,11 +51,15 @@ tuvastamise meetodeid (nt Fmask, Sen2Cor täiendused) või sügavõppel põhinev
 pilvemaskimudeleid, et taastada katkenud ajaread ja saavutada pidevam andmevoog.
 
 \textbf{Mudeli peenhäälestuse automatiseerimine} 
-Hüperparameetrite käsitsi otsing on
-ajamahukas. Võiks rakendada Bayesia optimeerimist või evolutsioonialgoritme (nt
-Optuna, Hyperopt) hüpermäärade leidmiseks, samuti kasutada automaatset Data
-Augmentation strateegiate valikut (nt AutoAugment), et tugevdada mudeli
-üldistusvõimet väheste andmetega.
+Süvaõppe mudelite arendamise üks ajamahukamaid osi on optimaalsete
+hüperparameetrite käsitsi otsing. Selle protsessi automatiseerimiseks ja
+efektiivsemaks muutmiseks võiks rakendada intelligentseid otsingumeetodeid, nagu
+Bayesi optimeerimine või evolutsioonialgoritmid, mida pakuvad teegid nagu Optuna
+ja Hyperopt. Erinevalt juhuslikust otsingust õpivad need meetodid eelnevatest
+katsetest: Bayesi optimeerimine ehitab tõenäosusliku mudeli ennustamaks kõige
+lootustandvamaid parameetrite kombinatsioone, samas kui evolutsioonialgoritmid
+aretavad parimaid lahendusi läbi ``ellujäämise'` ja ``mutatsioonide''
+põlvkondade vältel.
 
 \textbf{Üldistusvõime ja siirdõpe uutes piirkondades} 
 Järgnevalt on soovitatav hinnata
