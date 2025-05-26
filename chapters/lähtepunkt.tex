@@ -50,10 +50,10 @@ ResNet34 on 34-kihiline sügav närvivõrk, mis põhineb VGG-19 inspireeritud �
 ResNet50 laiendab jääkühikute ideed kolmik-kihiliste pudelikaelablokkidega: 1×1 konvolutsioon vähendab dimensiooni, 3×3 konvolutsioon töötleb omadusi ja 1×1 konvolutsioon taastab dimensiooni. See arhitektuur võimaldab sügavust tõsta 50 kihini, hoides samal ajal arvutuskoormust kontrolli all. Põhimõte on sama – lünkühendus ühendab sisendi väljundiga, et säilitada gradientide voo kogu võrgu ulatuses.
 
 % === 1. U-Net segmentatsioonipea ===
-\begin{figure}[!ht]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[node distance=8mm, auto, >=stealth]
-    % Nodes
+
     \node (input) [draw, rectangle] {Sisendomadused};
     \node (conv1) [draw, rectangle, below=of input] {1×1 Conv};
     \node (conv3) [draw, rectangle, below=of conv1] {3×3 Conv + ReLU × n};
@@ -137,7 +137,7 @@ U-Net koosneb sümmeetrilisest kokkutõmbuva ja laieneva radade (encoder-decoder
 DeepLabv3 kasutab atrooskonvolutsioone (dilated convolutions) erinevatel kihtidel, et laiendada vastuvõtupiirkonda ilma lahutusvõimet kahjustamata, ning Atrous Spatial Pyramid Pooling (ASPP) moodulit, mis kogub omadusi eri skaala tasanditel. See lähenemine võimaldab segmentatsioonil tuvastada objektide piirjooni täpsemalt, eriti keerukates satelliitpiltides.
 
 % === 2. DeepLabv3 segmentatsioonipea ===
-\begin{figure}[!ht]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[node distance=8mm, auto, >=stealth]
     % Nodes
@@ -267,7 +267,7 @@ Mudelite kombinatsioon sõltub kolmest peamisest komponentist: kodeerijast, opti
 Sellise 3 × 2 × 3 kombinatsiooni korral tuleb kokku 18 eraldi mudelit, mida hinnata näiteks IoU (Intersection over Union) ja täpsuse alusel. Treening seisneb esmajärjekorras kodeerija eel-treenitud kaalu lahtipakkimises (transfer learning), seejärel kogu võrgu peenhäälestuses, kasutades sobivat optimeerijat ning õppemäära skeemi.
 
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[node distance=10mm]
     % sõlmed
