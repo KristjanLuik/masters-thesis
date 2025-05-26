@@ -78,7 +78,11 @@ hüperparameetreid, nagu õppimismäär (nt 1e-5, 5e-5, 1e-4), partii suurus (1,
 4) ning rakendati nii külmutamist (Freeze) kui ka peenhäälestamist (FineTune).
 
 \bigskip
-\begin{longtable}{llll}
+
+\begin{table}[H]
+    \caption{DINOv2 eksperimendi tulemused}
+    \label{tab:dinov2_results}
+    \begin{longtable}{llll}
     \textbf{Konfiguratsioon} & \textbf{Mean Dice} & \textbf{Mean IoU} & \textbf{Mean Täpsus} \\
     \hline
     ViTB14 LinearHead LR5e-5 BS2 E5 Freeze & 0.18 & 0.16 & 0.26 \\
@@ -88,9 +92,11 @@ hüperparameetreid, nagu õppimismäär (nt 1e-5, 5e-5, 1e-4), partii suurus (1,
     ViTL14 UPerNetHead LR1e-5 BS1 E3 Freeze & 0.160 & 0.270 & 0.34 \\
     ViTS14 FPNHead LR1e-5 BS4 E5 FineTune & 0.23 & 0.25 & 0.38 \\
     \hline
-    \caption{DINOv2 eksperimendi tulemused}
-    \label{tab:dinov2_results}
 \end{longtable}
+\end{table}
+\addtocounter{table}{-1}
+
+
 \bigskip
 
 Eksperimentide tulemused näitavad, et DINOv2-põhiste mudelite jõudlus satelliidipiltide segmenteerimisel sõltub oluliselt närvivõrgu selgroo suurusest, segmenteerimispea keerukusest ja treeningustrateegiast. Suuremad närvivõrkude selgrood (nt ViTG14) ja mitme skaala tunnuseid töötlevad pead (nt FPNHead) andsid parimaid tulemusi, saavutades keskmise IoU kuni 0,28 ja täpsuse kuni 0,38. Peenhäälestamine parandas jõudlust võrreldes külmutatud mudelitega, kuid pikaajalistes treeningutes (500–800 epohhi) ilmnes ebastabiilsus, mis viitab ületreenimisele või ebapiisavale regulatsioonile.
@@ -110,7 +116,11 @@ Tabelis on seitse eksperimenti, mis erinevad mudeli variandi, epohhide arvu,
     \item Kõrgeim Dice:  0.262514 (sama konfiguratsioon: large, õppimiskiirus $1 \times 10^{-5}$, Multi-Layer pea).
 \end{itemize}
 
-\begin{longtable}{ccccccc}
+
+\begin{table}[H]
+    \caption{Samv2 eksperimendi tulemused}
+    \label{tab:samv2_results}
+    \begin{longtable}{ccccccc}
     \hline
     Variant & Epochs & Learning Rate & Head Type & IoU & Dice \\
     \hline
@@ -122,9 +132,10 @@ Tabelis on seitse eksperimenti, mis erinevad mudeli variandi, epohhide arvu,
         base\_plus & 501 & $1 \times 10^{-4}$ & Multi-Layer & 0.279433 & 0.195139  \\
         large &  501 & $1 \times 10^{-4}$ & Simple & 0.242327 & 0.163633 \\
     \hline
-\caption{Samv2 eksperimendi tulemused}
-\label{tab:samv2_results}
 \end{longtable}
+\end{table}
+\addtocounter{table}{-1}
+
 
 Järgnevas joonises on välja toodud SAMv2 eksperimendi tulemused eksperimendi lõikes ja jaotadud klassideks.
 

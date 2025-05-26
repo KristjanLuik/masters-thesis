@@ -245,23 +245,26 @@ FPN loob hierarhilise omaduskaardi püramiidi, kombineerides madalama lahutusvõ
 
 Mudelite kombinatsioon sõltub kolmest peamisest komponentist: kodeerijast, optimeerijast ja segmentatsioonipeast. Hüperparameetrite ruumiline uurimine hõlmab kõigi võimalike kombinatsioonide treenimist ning tulemuste võrdlust, mis tagab parima täpsuse ja üldistamisvõime. Hüperparameetrite otsing sisaldas järgmisi seadeid:
 
-%* **Kodeerija**: `resnet34` | `resnet50` | `mobilenet_v2`
-%* **Optimeerija**: `adam` | `adamw`
-%* **Pea**: `unet` | `deeplabv3` | `fpn`
-\begin{longtable}{ll}
-    \hline
-    \textbf{Hüperparameeter} & \textbf{Võimalikud väärtused} \\
-    \hline
-    encoder\_name      & \{resnet34, resnet50, mobilenet\_v2\} \\
-    encoder\_weights   & \{imagenet, None\} \\
-    lr                 & $[1\times10^{-5},\,1\times10^{-3}]$ \\
-    batch\_size        & \{2\} \\
-    optimizer          & \{adam, adamw\} \\
-    head               & \{unet, deeplabv3, fpn\} \\
-    \hline
+
+\begin{table}[H]
     \caption{Hüperparameetrite kombinatsioonid}
     \label{tab:hyperparameter_kombinatsioonid}
-\end{longtable}
+    \begin{longtable}{ll}
+        \hline
+        \textbf{Hüperparameeter} & \textbf{Võimalikud väärtused} \\
+        \hline
+        encoder\_name      & \{resnet34, resnet50, mobilenet\_v2\} \\
+        encoder\_weights   & \{imagenet, None\} \\
+        lr                 & $[1\times10^{-5},\,1\times10^{-3}]$ \\
+        batch\_size        & \{2\} \\
+        optimizer          & \{adam, adamw\} \\
+        head               & \{unet, deeplabv3, fpn\} \\
+        \hline
+
+    \end{longtable}
+\end{table}
+\addtocounter{table}{-1}
+
 
 
 Sellise 3 × 2 × 3 kombinatsiooni korral tuleb kokku 18 eraldi mudelit, mida hinnata näiteks IoU (Intersection over Union) ja täpsuse alusel. Treening seisneb esmajärjekorras kodeerija eel-treenitud kaalu lahtipakkimises (transfer learning), seejärel kogu võrgu peenhäälestuses, kasutades sobivat optimeerijat ning õppemäära skeemi.

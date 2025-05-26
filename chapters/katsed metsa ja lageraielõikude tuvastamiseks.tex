@@ -22,7 +22,10 @@ kombinatsioone. Kõik eksperimendid salvestavad iga tsükli järel nii IoU kui k
 Dice tulemused ning parimad kontrollpunktid kopeeritakse lõppanalüüsiks.
 \bigskip
 
-\begin{longtable}{lllll}
+\begin{table}[H]
+    \caption{DINO v2 eksperimendi seadistused}
+    \label{tab:dinov2_experiments}
+    \begin{longtable}{lllll}
         \textbf{Tunnus} & \textbf{Backbone} & \textbf{Freeze Backbone} & \textbf{Head Type}  & \text{Optimeerija} \\
         \hline
         Trial 1 & ViT-small & Yes                    & LinearClassifier  & AdamW \\
@@ -38,9 +41,10 @@ Dice tulemused ning parimad kontrollpunktid kopeeritakse lõppanalüüsiks.
         Trial 11& ViT-base  & No                     & UPerNetHead       & AdamW \\
         Trial 12& ViT-base  & No                     & FPNHead           & AdamW \\
         \hline
-    \caption{DINO v2 eksperimendi seadistused}
-    \label{tab:dinov2_experiments}
 \end{longtable}
+\end{table}
+\addtocounter{table}{-1}
+
 
 
 SAM v2 katsed on üles ehitatud Meta ``Segment Anything Model'' teise põlvkonna
@@ -62,19 +66,23 @@ mudeli konfiguratsioonide, pea-valiku ja tuumvõrgu külmutamise
 kombinatsioonides, et tuvastada kõige tõhusam lähenemine metsa alade ja
 lageraielõikude tuvastamiseks satelliitpiltidelt.
 
-\bigskip
-\begin{longtable}{lllll}
-    \textbf{Tunnus} & \textbf{Model Config} & \textbf{Freeze Backbone} & \textbf{Head Type} & \textbf{Optimeerija} \\
-    \hline
-        Trial 1 & default      & Yes                    & MaskDecoder (orig.) & AdamW \\
-        Trial 2 & default      & Yes                    & FPNHead             & AdamW \\
-        Trial 3 & default      & No                     & MaskDecoder (orig.) & AdamW \\
-        Trial 4 & default      & No                     & FPNHead             & AdamW \\
-        Trial 5 & large        & Yes                    & MaskDecoder (orig.) & AdamW \\
-        Trial 6 & large        & Yes                    & FPNHead             & AdamW \\
-        Trial 7 & large        & No                     & MaskDecoder (orig.) & AdamW \\
-        Trial 8 & large        & No                     & FPNHead             & AdamW \\
-    \hline
+\begin{table}[H]
     \caption{SAM v2 eksperimendi seadistused}
     \label{tab:samv2_experiments}
-\end{longtable}
+    \begin{longtable}{lllll}
+        \textbf{Tunnus} & \textbf{Model Config} & \textbf{Freeze Backbone} & \textbf{Head Type} & \textbf{Optimeerija} \\
+        \hline
+            Trial 1 & default      & Yes                    & MaskDecoder (orig.) & AdamW \\
+            Trial 2 & default      & Yes                    & FPNHead             & AdamW \\
+            Trial 3 & default      & No                     & MaskDecoder (orig.) & AdamW \\
+            Trial 4 & default      & No                     & FPNHead             & AdamW \\
+            Trial 5 & large        & Yes                    & MaskDecoder (orig.) & AdamW \\
+            Trial 6 & large        & Yes                    & FPNHead             & AdamW \\
+            Trial 7 & large        & No                     & MaskDecoder (orig.) & AdamW \\
+            Trial 8 & large        & No                     & FPNHead             & AdamW \\
+        \hline
+    \end{longtable}
+\end{table}
+\addtocounter{table}{-1}
+
+

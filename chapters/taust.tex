@@ -60,7 +60,7 @@ kindel lainepikkuse vahemik, mida spetsiifiliste filtrite abil eraldatakse \cite
 Ülevaate Sentinel-2 spektriribadest saab Tabelist \ref{tab:s2bands}.
 \bigskip
 
-\begin{table}
+\begin{table}[H]
 \caption{Sentinel-2 MSI spektriribad ja nende kasutusvaldkonnad \cite{S2Mission}.}
 \label{tab:s2bands}
 \begin{longtable}{p{1cm}p{1.6cm}p{1.6cm}p{9cm}}
@@ -84,11 +84,12 @@ kindel lainepikkuse vahemik, mida spetsiifiliste filtrite abil eraldatakse \cite
     \hline
 \end{longtable}
 \end{table}
+\addtocounter{table}{-1}
 
 Ribade kombinerimine võimaldab luua erinevaid indekseid, mis aitavad
 eristada erinevaid maapinna omadusi. Näiteks kasutades lähiinfrapunariba B08 saab luua \textbf{NGR}i indeksi, mis põhineb lähi-infrapuna (LIF), rohelise ja punase kanali järjestusel (tähistatakse LRP), kuvab LIF-signaali punases kanalis, rohelise kanal jääb roheliseks ning punane kanal esitatakse sinisena. Selle tulemusel on tervislik taimestik piltidel eredalt punane, kuna rohelised lehed peegeldavad tugevalt lähi-infrapuna spektri osa. Veekogud, mis neelavad nii nähtavat valgust kui ka lähi-infrapuna, ilmuvad tumedana, mullad ja ehituspinnad, mille peegeldus on mõõdukas kõigis kanalites, võtavad omale hallika või kõikuva tooni. Selline komposiit võimaldab metsanduses efektiivselt hinnata taimede seisundit ja kaardistada metsapiire. Ülevaate erinevate spektriribade kombinatsioonide kasutusest leiab Tabelist \ref{tab:NGR_kasutus}.
 
-\begin{table}
+\begin{table}[H]
 \caption{NGR indeksi värvi kasutusjuhend}
 \label{tab:NGR_kasutus}
 \begin{longtable}{lp{5cm}l}
@@ -102,6 +103,7 @@ eristada erinevaid maapinna omadusi. Näiteks kasutades lähiinfrapunariba B08 s
     \hline
 \end{longtable}
 \end{table}
+\addtocounter{table}{-1}
 
 \subsection{Koordinaatsüsteemid ja CRS}
 Satelliidilt saadud andmete maapinnaga sidumiseks on vaja kasutatada koordinaatsüsteeme ja
